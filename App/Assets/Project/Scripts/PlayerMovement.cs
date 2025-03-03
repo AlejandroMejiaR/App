@@ -1,31 +1,58 @@
 using UnityEngine;
+using System.Runtime.InteropServices; // Necesario para importar JavaScript en WebGL
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f; // Velocidad del jugador
-    public float rotationSpeed = 10f; // Velocidad de rotación
+    public float pcSpeed = 5f;
+    public float mobileSpeed = 5f; 
+    public float pcRotationSpeed = 10f;
+    public float mobileRotationSpeed = 25f; 
+
+    private float speed;
+    private float rotationSpeed;
+
     private Rigidbody rb;
     private Vector3 moveDirection;
 
-    public Joystick joystick; // Referencia al joystick virtual
-    public GameObject joystickUI; // Panel del joystick para ocultarlo en PC
+    public Joystick joystick; 
+    public GameObject joystickUI;
 
-    private bool isMobile; // Detectar si está en móvil
+    private bool isMobile = false;
+
+    #if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
+    #endif
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // Evita que el Rigidbody rote por colisiones
-        rb.linearDamping = 25f; // Controla la fricción y evita deslizamiento
+        rb.freezeRotation = true;
+        rb.linearDamping = 25f;
 
-        // Detectar si el juego está corriendo en un dispositivo móvil
-        #if UNITY_IOS || UNITY_ANDROID
-            isMobile = true;
+        // Detectar si el juego está en móvil (WebGL o Android/iOS)
+        #if UNITY_WEBGL && !UNITY_EDITOR
+        isMobile = IsMobile();
         #else
-            isMobile = false;
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            isMobile = true;
+        }
         #endif
 
-        // Ocultar el joystick en PC
+        // Ajustar velocidad y rotación según la plataforma
+        if (isMobile)
+        {
+            speed = mobileSpeed;
+            rotationSpeed = mobileRotationSpeed;
+        }
+        else
+        {
+            speed = pcSpeed;
+            rotationSpeed = pcRotationSpeed;
+        }
+
+        // Mostrar joystick en móviles
         if (joystickUI != null)
         {
             joystickUI.SetActive(isMobile);
@@ -34,15 +61,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Leer la entrada del teclado o joystick virtual
-        float moveX = isMobile ? joystick.Horizontal : Input.GetAxis("Horizontal");
-        float moveZ = isMobile ? joystick.Vertical : Input.GetAxis("Vertical");
+        // Leer entrada del teclado o joystick
+        float moveX = (isMobile ? joystick.Horizontal : Input.GetAxis("Horizontal"));
+        float moveZ = (isMobile ? joystick.Vertical : Input.GetAxis("Vertical"));
 
-        // Convertir entrada en movimiento en el mundo isométrico
+        // Convertir entrada en movimiento isométrico
         moveDirection = new Vector3(moveX, 0, moveZ);
-        moveDirection = Quaternion.Euler(0, 45, 0) * moveDirection; // Rotar para alinearlo con la vista isométrica
+        moveDirection = Quaternion.Euler(0, 45, 0) * moveDirection;
 
-        // Si hay movimiento, rotar el personaje
+        // Rotación del personaje
         if (moveDirection.magnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
@@ -54,14 +81,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveDirection.magnitude > 0.1f)
         {
-            // Aplicar movimiento normal
             rb.linearVelocity = moveDirection.normalized * speed + new Vector3(0, rb.linearVelocity.y, 0);
         }
         else
         {
-            // Detención instantánea
             rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero; // Evita cualquier giro involuntario
+            rb.angularVelocity = Vector3.zero;
         }
     }
 }
