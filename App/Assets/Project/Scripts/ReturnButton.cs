@@ -5,6 +5,13 @@ public class ReturnButton : MonoBehaviour
 {
     public void ReturnToLobby()
     {
-        SceneManager.LoadScene("Lobby"); // Cargar la escena principal
+        // Obtener el progreso actual y sumarle 1 al regresar
+        int progresoActual = PlayerPrefs.GetInt("MinijuegosCompletados", 0);
+        progresoActual++;
+        PlayerPrefs.SetInt("MinijuegosCompletados", progresoActual);
+        PlayerPrefs.Save(); // Guardar los datos
+
+        // Cargar la escena del Lobby
+        SceneManager.LoadScene("Lobby");
     }
 }

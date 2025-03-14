@@ -12,8 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void Salir()
     {
-        Application.Quit();
-        Debug.Log("Saliendo del juego...");
+        SceneManager.LoadScene("Register");
     }
 }
 
