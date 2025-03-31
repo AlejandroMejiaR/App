@@ -10,158 +10,152 @@ public class Login : MonoBehaviour
 {
     [Header("UI Elements")]
     public TMP_InputField nameInputField;
-    public TMP_InputField passwordInputField;
-    public Button loginButton;
-    public Button registerButton;
+    public Button actionButton;
     public TextMeshProUGUI warningText;
-    //public GameObject loadingIndicator;
+    public TextMeshProUGUI titleText;
 
     [Header("Configuration")]
-    [SerializeField] private int passwordLength = 4;
-    [SerializeField] private float timeBetweenAttempts = 1f;
+    [SerializeField] private int maxUsernameLength = 15;
+    [SerializeField] private string mainMenuScene = "MainMenu";
+    [SerializeField] private string defaultUsername = "Jugador";
 
-    private float lastAttemptTime;
-    private int failedAttempts = 0;
-    private const int MaxAttempts = 5;
+    private bool isChangingUsername = false;
+    private bool isAuthenticated = false;
 
-    private void Start()
+    private async void Start()
     {
-        warningText.gameObject.SetActive(false);
-        //loadingIndicator.SetActive(false);
-        
-        if (PlayerPrefs.HasKey("LastUsername"))
-        {
-            nameInputField.text = PlayerPrefs.GetString("LastUsername");
-            passwordInputField.Select();
-        }
-        else
-        {
-            nameInputField.Select();
-        }
-
-        loginButton.onClick.AddListener(() => _ = LoginUser());
-        registerButton.onClick.AddListener(GoToRegister);
-        
-        // Cambiamos a un método separado para la inicialización asíncrona
-        _ = InitializeAndCheckSession();
+        ConfigureUI();
+        await InitializeServices();
+        LoadExistingUser();
     }
 
-    // Nuevo método para manejar la inicialización asíncrona
-    private async Task InitializeAndCheckSession()
+    private void ConfigureUI()
+    {
+        warningText.gameObject.SetActive(false);
+        nameInputField.characterLimit = maxUsernameLength;
+        
+        isChangingUsername = PlayerPrefs.HasKey("ChangingUser");
+        
+        titleText.text = isChangingUsername ? "CAMBIAR NOMBRE" : "CREAR USUARIO";
+        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = isChangingUsername ? "ACTUALIZAR" : "JUGAR";
+        
+        if(isChangingUsername)
+        {
+            PlayerPrefs.DeleteKey("ChangingUser");
+            PlayerPrefs.Save();
+        }
+    }
+
+    private async Task InitializeServices()
     {
         try
         {
-            if (UnityServices.State != ServicesInitializationState.Initialized)
+            if (UnityServices.State == ServicesInitializationState.Uninitialized)
             {
                 await UnityServices.InitializeAsync();
             }
 
-            if (AuthenticationService.Instance.IsSignedIn)
+            if (!AuthenticationService.Instance.IsSignedIn)
             {
-                SceneManager.LoadScene("MainMenu");
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log($"Token: {AuthenticationService.Instance.PlayerId}");
+            }
+            isAuthenticated = true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Error en servicios: {ex.Message}");
+            ShowWarning("Modo local activado. Datos no se sincronizarán.");
+        }
+    }
+
+    private void LoadExistingUser()
+    {
+        if (PlayerPrefs.HasKey("UserData"))
+        {
+            string jsonData = PlayerPrefs.GetString("UserData");
+            UserData userData = JsonUtility.FromJson<UserData>(jsonData);
+            nameInputField.text = userData.username;
+            Debug.Log($"Nombre actual: {userData.username}");
+        }
+    }
+
+    private void SaveUserData(string username)
+    {
+        UserData userData = new UserData()
+        {
+            username = username,
+            playerId = isAuthenticated ? AuthenticationService.Instance.PlayerId : "local-user",
+            lastLogin = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm")
+        };
+
+        string jsonData = JsonUtility.ToJson(userData);
+        PlayerPrefs.SetString("UserData", jsonData);
+        PlayerPrefs.Save();
+
+        if(isChangingUsername)
+        {
+            Debug.Log($"Nombre cambiado a: {username}");
+            Debug.Log($"Nuevo token: {userData.playerId}");
+        }
+    }
+
+    public void OnActionButtonClicked()
+    {
+        string userName = nameInputField.text.Trim();
+
+        if (string.IsNullOrEmpty(userName))
+        {
+            userName = defaultUsername;
+            nameInputField.text = userName;
+        }
+
+        if (!ValidateUsername(userName)) return;
+
+        actionButton.interactable = false;
+        
+        SaveUserData(userName);
+
+        LoadMainMenu();
+    }
+
+    private void LoadMainMenu()
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(mainMenuScene))
+            {
+                if (Application.CanStreamedLevelBeLoaded(mainMenuScene))
+                {
+                    SceneManager.LoadScene(mainMenuScene);
+                }
+                else
+                {
+                    ShowWarning("Error: Escena no configurada");
+                    actionButton.interactable = true;
+                }
+            }
+            else
+            {
+                ShowWarning("Error: No se puede cargar el juego");
+                actionButton.interactable = true;
             }
         }
         catch (System.Exception ex)
         {
-            Debug.LogError($"Session check error: {ex}");
+            ShowWarning("Error al iniciar el juego");
+            actionButton.interactable = true;
         }
     }
 
-    private void GoToRegister()
+    private bool ValidateUsername(string username)
     {
-        SceneManager.LoadScene("Register");
-    }
-
-    private async Task LoginUser()
-    {
-        if (Time.time - lastAttemptTime < timeBetweenAttempts) return;
-        lastAttemptTime = Time.time;
-
-        string userName = nameInputField.text.Trim();
-        string password = passwordInputField.text.Trim();
-
-        if (!ValidateInputs(userName, password)) return;
-
-        //loadingIndicator.SetActive(true);
-        loginButton.interactable = false;
-        warningText.gameObject.SetActive(false);
-
-        try
+        if (username.Length > maxUsernameLength)
         {
-            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(userName, password);
-            
-            PlayerPrefs.SetString("LastUsername", userName);
-            SceneManager.LoadScene("MainMenu");
-        }
-        catch (AuthenticationException ex) when (ex.ErrorCode == 10006) // AccountNotFound
-        {
-            ShowWarning("Usuario no registrado. Por favor regístrese.");
-            registerButton.gameObject.SetActive(true);
-        }
-        catch (AuthenticationException ex)
-        {
-            failedAttempts++;
-            HandleLoginError(ex);
-            
-            if (failedAttempts >= MaxAttempts)
-            {
-                loginButton.interactable = false;
-                ShowWarning($"Demasiados intentos. Espere {timeBetweenAttempts} segundos.");
-                await Task.Delay((int)(timeBetweenAttempts * 1000));
-                loginButton.interactable = true;
-                failedAttempts = 0;
-            }
-        }
-        finally
-        {
-            //loadingIndicator.SetActive(false);
-            loginButton.interactable = true;
-        }
-    }
-
-    // Resto de los métodos permanecen igual...
-    private bool ValidateInputs(string username, string password)
-    {
-        if (string.IsNullOrEmpty(username))
-        {
-            ShowWarning("Ingrese un nombre de usuario.");
+            ShowWarning($"Máximo {maxUsernameLength} caracteres");
             return false;
         }
-
-        if (password.Length != passwordLength || !IsNumeric(password))
-        {
-            ShowWarning($"La contraseña debe tener {passwordLength} dígitos numéricos.");
-            return false;
-        }
-
         return true;
-    }
-
-    private void HandleLoginError(AuthenticationException ex)
-    {
-        switch (ex.ErrorCode)
-        {
-            case 10000: // InvalidParameters
-                ShowWarning("Credenciales inválidas.");
-                break;
-                
-            case 10009: // InvalidSessionToken
-                ShowWarning("Sesión expirada.");
-                break;
-                
-            case 10010: // CredentialMismatch
-                ShowWarning("Usuario o contraseña incorrectos.");
-                break;
-                
-            case 10015: // NetworkError
-                ShowWarning("Error de conexión. Verifique su internet.");
-                break;
-                
-            default:
-                ShowWarning($"Error al iniciar sesión: {ex.Message}");
-                Debug.LogError($"Login error: {ex}");
-                break;
-        }
     }
 
     private void ShowWarning(string message)
@@ -169,21 +163,19 @@ public class Login : MonoBehaviour
         warningText.gameObject.SetActive(true);
         warningText.text = message;
         CancelInvoke(nameof(HideWarning));
-        Invoke(nameof(HideWarning), 5f);
+        Invoke(nameof(HideWarning), 3f);
     }
 
     private void HideWarning()
     {
         warningText.gameObject.SetActive(false);
     }
+}
 
-    private bool IsNumeric(string value)
-    {
-        foreach (char c in value)
-        {
-            if (!char.IsDigit(c))
-                return false;
-        }
-        return true;
-    }
+[System.Serializable]
+public class UserData
+{
+    public string username;
+    public string playerId;
+    public string lastLogin;
 }

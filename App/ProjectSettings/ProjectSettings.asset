@@ -919,11 +919,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 59ba1e40-ad62-46b4-a80f-dfd5fd2ecabe
+  cloudProjectId: 4fb7e1a7-602b-4545-810a-1c9ae6483887
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: App3d
-  organizationId: app3d
+  projectName: APPLAB88
+  organizationId: applab88
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

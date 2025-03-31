@@ -1,48 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.Services.Authentication;
-using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPanel;
-
+    
+    // Método para ir al Lobby
     public void Jugar()
     {
         SceneManager.LoadScene("Lobby");
     }
 
-    public void Salir()
+    // Método para cambiar de usuario (antes "Salir")
+    public void CambiarUsuario()
     {
-        // Llamamos al método de logout sin hacerlo async
-        PerformLogout();
+        // Marcar que estamos cambiando el usuario (no saliendo)
+        PlayerPrefs.SetInt("ChangingUser", 1);
+        PlayerPrefs.Save();
+        
+        SceneManager.LoadScene("Login");
     }
 
-    private async void PerformLogout()
+    // Método para mostrar/ocultar ajustes (si lo necesitas)
+    public void ToggleSettings()
     {
-        // Mostrar feedback visual (opcional)
-        if (settingsPanel != null) settingsPanel.SetActive(false);
-        
-        try
+        if(settingsPanel != null)
         {
-            // Verificar y cerrar sesión si está autenticado
-            if (AuthenticationService.Instance.IsSignedIn)
-            {
-                await Task.Run(() => AuthenticationService.Instance.SignOut());
-                Debug.Log("Sesión cerrada correctamente");
-            }
-
-            // Limpiar datos temporales
-            PlayerPrefs.DeleteKey("LastUsername");
-            PlayerPrefs.Save();
-
-            // Redirigir a Login
-            SceneManager.LoadScene("Login");
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"Error durante logout: {ex.Message}");
-            SceneManager.LoadScene("Login"); // Redirigir igualmente
+            settingsPanel.SetActive(!settingsPanel.activeSelf);
         }
     }
 }

@@ -360,7 +360,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1052802007}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: Salir
+        m_MethodName: CambiarUsuario
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cambiar Usuario
+  m_text: Cambiar Nombre de Usuario
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c3c56bb4e860064f9e34f0026bab9a4, type: 2}
   m_sharedMaterial: {fileID: -6379238340537902963, guid: 1c3c56bb4e860064f9e34f0026bab9a4, type: 2}
@@ -1926,8 +1926,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: a3f85e845a5e739449545f7110b41387, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9d522f25e47a4254fae826e00db84d70, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9d522f25e47a4254fae826e00db84d70, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e1a905ef55c976b4f8c1a840bcea442d, type: 3}
+  m_Resource: {fileID: 8300000, guid: e1a905ef55c976b4f8c1a840bcea442d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
