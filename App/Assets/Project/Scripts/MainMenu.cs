@@ -1,18 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel; // Referencia al panel de configuraci�n
-
+    public GameObject settingsPanel;
+    
+    // Método para ir al Lobby
     public void Jugar()
     {
-        SceneManager.LoadScene("Lobby"); // Cambia por el nombre de tu escena de juego
+        SceneManager.LoadScene("Lobby");
     }
 
-    public void Salir()
+    // Método para cambiar de usuario (antes "Salir")
+    public void CambiarUsuario()
     {
-        SceneManager.LoadScene("Register");
+        // Marcar que estamos cambiando el usuario (no saliendo)
+        PlayerPrefs.SetInt("ChangingUser", 1);
+        PlayerPrefs.Save();
+        
+        SceneManager.LoadScene("Login");
+    }
+
+    // Método para mostrar/ocultar ajustes (si lo necesitas)
+    public void ToggleSettings()
+    {
+        if(settingsPanel != null)
+        {
+            settingsPanel.SetActive(!settingsPanel.activeSelf);
+        }
     }
 }
-
