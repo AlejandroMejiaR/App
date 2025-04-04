@@ -4,12 +4,11 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel;
-    
-    // Método para ir al Lobby
+    public GameObject settingsPanel; // Referencia al panel de configuración
+
     public void Jugar()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene("CH_Selection"); // Cambiado a escena de selección de personaje
     }
 
     // Método para cambiar de usuario (antes "Salir")
