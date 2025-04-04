@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 9d522f25e47a4254fae826e00db84d70
+<<<<<<<< HEAD:App/Assets/Project/Audio/minecraft.mp3.meta
+guid: 1633c7396e4d3924db21005e3012cf63
+========
+guid: e1a905ef55c976b4f8c1a840bcea442d
+>>>>>>>> AlejandroM:App/Assets/Project/Audio/halo-theme-song-original.mp3.meta
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8

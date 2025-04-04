@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,9 +11,22 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("CH_Selection"); // Cambiado a escena de selección de personaje
     }
 
-    public void Salir()
+    // Método para cambiar de usuario (antes "Salir")
+    public void CambiarUsuario()
     {
-        SceneManager.LoadScene("Register");
+        // Marcar que estamos cambiando el usuario (no saliendo)
+        PlayerPrefs.SetInt("ChangingUser", 1);
+        PlayerPrefs.Save();
+        
+        SceneManager.LoadScene("Login");
+    }
+
+    // Método para mostrar/ocultar ajustes (si lo necesitas)
+    public void ToggleSettings()
+    {
+        if(settingsPanel != null)
+        {
+            settingsPanel.SetActive(!settingsPanel.activeSelf);
+        }
     }
 }
-
