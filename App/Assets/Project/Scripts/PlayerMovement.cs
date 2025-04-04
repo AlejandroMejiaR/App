@@ -3,6 +3,7 @@ using System.Runtime.InteropServices; // Necesario para importar JavaScript en W
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     public float pcSpeed = 5f;
     public float mobileSpeed = 5f; 
     public float pcRotationSpeed = 10f;
@@ -79,14 +80,17 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
         if (moveDirection.magnitude > 0.1f)
         {
             rb.linearVelocity = moveDirection.normalized * speed + new Vector3(0, rb.linearVelocity.y, 0);
+            animator.SetBool("Is_walking", true);
         }
         else
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            animator.SetBool("Is_walking", false);
         }
     }
 }
