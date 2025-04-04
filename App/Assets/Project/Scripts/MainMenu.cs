@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel; // Referencia al panel de configuraci�n
+    public GameObject settingsPanel; // Referencia al panel de configuración
 
     public void Jugar()
     {
-        SceneManager.LoadScene("Lobby"); // Cambia por el nombre de tu escena de juego
+        SceneManager.LoadScene("CH_Selection"); // Cambiado a escena de selección de personaje
     }
 
     public void Salir()
