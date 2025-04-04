@@ -1926,13 +1926,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: a3f85e845a5e739449545f7110b41387, type: 2}
-<<<<<<< HEAD
-  m_audioClip: {fileID: 8300000, guid: 1633c7396e4d3924db21005e3012cf63, type: 3}
-  m_Resource: {fileID: 8300000, guid: 1633c7396e4d3924db21005e3012cf63, type: 3}
-=======
-  m_audioClip: {fileID: 8300000, guid: e1a905ef55c976b4f8c1a840bcea442d, type: 3}
-  m_Resource: {fileID: 8300000, guid: e1a905ef55c976b4f8c1a840bcea442d, type: 3}
->>>>>>> AlejandroM
+  m_audioClip: {fileID: 8300000, guid: be3d72417e08fd54fa7b037afbe3013d, type: 3}
+  m_Resource: {fileID: 8300000, guid: be3d72417e08fd54fa7b037afbe3013d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
