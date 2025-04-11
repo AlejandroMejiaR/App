@@ -37,7 +37,7 @@ public class Login : MonoBehaviour
         isChangingUsername = PlayerPrefs.HasKey("ChangingUser");
         
         titleText.text = isChangingUsername ? "CAMBIAR NOMBRE" : "CREAR USUARIO";
-        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = isChangingUsername ? "ACTUALIZAR" : "JUGAR";
+        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = isChangingUsername ? "ACTUALIZAR" : "INGRESAR";
         
         if(isChangingUsername)
         {
