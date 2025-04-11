@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CubeGameManager : MonoBehaviour
 {
@@ -9,15 +11,22 @@ public class CubeGameManager : MonoBehaviour
     [Header("Referencias")]
     public List<CubeController> allCubes = new List<CubeController>();
     public List<SafeZone> safeZones = new List<SafeZone>();
+    public GameObject winMessagePanel; // Referencia al panel de victoria
     
     [Header("Configuración")]
     public float verificationDelay = 1f;
     public float victoryAnimationHeight = 2f;
+    public float zoneLowerHeight = -1f;
+    public float animationDuration = 1f;
+    public float victoryDelay = 1f;
     
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        if (winMessagePanel != null)
+            winMessagePanel.SetActive(false); // Asegurar que está oculto al inicio
     }
 
     public void CheckAllCubes()
@@ -53,6 +62,7 @@ public class CubeGameManager : MonoBehaviour
         
         if (allCorrect)
         {
+            yield return new WaitForSeconds(victoryDelay);
             StartCoroutine(VictoryAnimation());
         }
         else
@@ -78,12 +88,38 @@ public class CubeGameManager : MonoBehaviour
 
     private IEnumerator VictoryAnimation()
     {
+        // Animación de cubos
         foreach (CubeController cube in allCubes)
         {
             cube.MoveToHeight(victoryAnimationHeight);
         }
+
+        // Animación de zonas
+        foreach (SafeZone zone in safeZones)
+        {
+            StartCoroutine(zone.MoveDown(zoneLowerHeight, animationDuration));
+        }
         
         yield return new WaitForSeconds(1f);
+        
+        // Mostrar mensaje de victoria
+        if (winMessagePanel != null)
+        {
+            winMessagePanel.SetActive(true);
+            
+            // Configurar el botón del panel
+            Button nextLevelButton = winMessagePanel.GetComponentInChildren<Button>();
+            if (nextLevelButton != null)
+            {
+                nextLevelButton.onClick.AddListener(LoadNextLevel);
+            }
+        }
+        
         Debug.Log("¡Victoria! Todos los cubos están correctamente colocados");
+    }
+
+        public void LoadNextLevel()
+    {
+        SceneManager.LoadScene("Minijuego1Level1");
     }
 }

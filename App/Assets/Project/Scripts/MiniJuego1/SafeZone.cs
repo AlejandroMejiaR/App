@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SafeZone : MonoBehaviour
 {
@@ -12,12 +13,19 @@ public class SafeZone : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private Renderer zoneRenderer;
     public CubeController currentCube { get; private set; }
+    private Vector3 initialPosition;
 
     private void Start()
     {
+        initialPosition = transform.position;
         if(zoneRenderer == null)
             zoneRenderer = GetComponent<Renderer>();
         ResetZone();
+    }
+
+    public Vector3 GetZoneDimensions()
+    {
+        return transform.localScale;
     }
 
     public void CheckForCube(CubeController cube)
@@ -63,6 +71,23 @@ public class SafeZone : MonoBehaviour
     public void ResetZone()
     {
         zoneRenderer.material.color = neutralColor;
+        transform.position = initialPosition;
+    }
+
+    public IEnumerator MoveDown(float targetY, float duration)
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(startPos.x, targetY, startPos.z);
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsedTime/duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        transform.position = endPos;
     }
 
     private void OnDrawGizmosSelected()

@@ -12,9 +12,12 @@ public class CubeController : MonoBehaviour
     public bool isInSafeZone;
     public bool isLocked;
     
+    private Vector3 originalScale;
+
     private void Start()
     {
         initialPosition = new Vector3(transform.position.x, 20f, transform.position.z);
+        originalScale = transform.localScale;
         ResetPosition();
     }
 
@@ -41,6 +44,7 @@ public class CubeController : MonoBehaviour
         }
         
         transform.position = initialPosition;
+        transform.localScale = originalScale;
     }
 
     public void MoveToHeight(float y)
@@ -83,5 +87,17 @@ public class CubeController : MonoBehaviour
             currentSafeZone = null;
         }
         isInSafeZone = false;
+    }
+
+    public void AdjustScaleToZone(Vector3 zoneScale)
+    {
+        Vector3 newScale = new Vector3(
+            //zoneScale.x - 5f,
+            zoneScale.x - 1f,
+            transform.localScale.y,
+            zoneScale.z- 1f
+            //zoneScale.z - 3f
+        );
+        transform.localScale = newScale;
     }
 }

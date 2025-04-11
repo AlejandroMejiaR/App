@@ -7,10 +7,12 @@ public class DragObject : MonoBehaviour
     private float mZCoord;
     private CubeController cubeController;
     private bool isDragging = false;
+    private Vector3 originalScale;
 
     private void Start()
     {
         cubeController = GetComponent<CubeController>();
+        originalScale = transform.localScale;
     }
 
     private void OnMouseDown()
@@ -77,6 +79,7 @@ public class DragObject : MonoBehaviour
             if(cubeController.isInSafeZone)
             {
                 foundZone = true;
+                cubeController.AdjustScaleToZone(zone.GetZoneDimensions());
                 cubeController.LockInPlace();
                 break;
             }
@@ -86,6 +89,7 @@ public class DragObject : MonoBehaviour
         {
             yield return new WaitForSeconds(0.3f);
             cubeController.ResetPosition();
+            transform.localScale = originalScale;
         }
         
         CubeGameManager.Instance.CheckAllCubes();
