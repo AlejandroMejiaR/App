@@ -1,11 +1,30 @@
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MenuOpciones : MonoBehaviour
 {
-    [SerializeField] private AudioMixer audioMixer;
-    public void CambiarVolumen(float volumen)
+    public Slider musicSlider;
+    public Slider sfxSlider;
+
+    private void Start()
     {
-        audioMixer.SetFloat("Volumen", volumen);
+     
+        // Vincular los sliders con los métodos correspondientes
+        musicSlider.onValueChanged.AddListener(delegate { CambiarVolumenMusica(); });
+        sfxSlider.onValueChanged.AddListener(delegate { CambiarVolumenSFX(); });
+    }
+
+    // Cambiar el volumen de la música
+    public void CambiarVolumenMusica()
+    {
+        AudioManager.instance.CambiarVolumenMusica(musicSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value); // Guardar el valor
+    }
+
+    // Cambiar el volumen de los SFX
+    public void CambiarVolumenSFX()
+    {
+        AudioManager.instance.CambiarVolumenSFX(sfxSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value); // Guardar el valor
     }
 }
