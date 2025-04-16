@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel; // Referencia al panel de configuración
+   // public GameObject settingsPanel; // Referencia al panel de configuración
 
     public void Jugar()
     {
@@ -21,12 +21,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Login");
     }
 
-    // Método para mostrar/ocultar ajustes (si lo necesitas)
+    /*// Método para mostrar/ocultar ajustes (si lo necesitas)
     public void ToggleSettings()
     {
         if(settingsPanel != null)
         {
             settingsPanel.SetActive(!settingsPanel.activeSelf);
         }
-    }
+    }*/
 }
