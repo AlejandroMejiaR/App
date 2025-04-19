@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class UIManager : MonoBehaviour
     [Header("Game UI")]
     public Button captureButton;
     public GameObject levelCompletePanel;
-    public GameObject gameCompletePanel;
+    public TextMeshProUGUI levelCompleteText;
     public Button nextLevelButton;
     public Button restartButton;
     
@@ -29,54 +30,27 @@ public class UIManager : MonoBehaviour
     
     private void Start()
     {
-        // Get references from GameManager
+        InitializeSliders();
+        
         if (GameManager.Instance != null)
         {
             cameraController = GameManager.Instance.cameraController;
             lightController = GameManager.Instance.lightController;
-            
-            // Update reference to UIManager in GameManager
             GameManager.Instance.uiManager = this;
         }
-        else
-        {
-            Debug.LogError("GameManager instance not found!");
-            return;
-        }
-        
-        // Set up camera buttons
+
         if (nextCameraButton) nextCameraButton.onClick.AddListener(cameraController.NextCamera);
         if (prevCameraButton) prevCameraButton.onClick.AddListener(cameraController.PreviousCamera);
         
-        // Set up capture button
         if (captureButton) captureButton.onClick.AddListener(() => {
             GameManager.Instance.CaptureAndCheckWinCondition();
         });
-        
-        // Initialize sliders with proper min/max values and starting at 0
-        for (int i = 0; i < intensitySliders.Length; i++)
-        {
-            if (intensitySliders[i] != null && GameManager.Instance.currentLevel != null)
-            {
-                // Set slider min to 0
-                intensitySliders[i].minValue = 0;
-                
-                // Set slider max to match the max intensity from level data
-                // Add a small buffer to allow setting slightly above if needed
-                float maxIntensity = GameManager.Instance.currentLevel.targetLightSettings[i].maxIntensity + 1f;
-                intensitySliders[i].maxValue = maxIntensity;
-                
-                // Set initial value to 0
-                intensitySliders[i].value = 0;
-            }
-        }
-        
-        // Set up color picker buttons (simple color toggle)
+
         for (int i = 0; i < colorButtons.Length; i++)
         {
             if (colorButtons[i] != null)
             {
-                int index = i; // Capture for lambda
+                int index = i;
                 Button btn = colorButtons[i].GetComponent<Button>();
                 if (btn != null)
                 {
@@ -88,33 +62,77 @@ public class UIManager : MonoBehaviour
             }
         }
         
-        // Set up game UI buttons
-        if (nextLevelButton) nextLevelButton.onClick.AddListener(GameManager.Instance.LoadNextLevel);
         if (restartButton) restartButton.onClick.AddListener(GameManager.Instance.RestartLevel);
         
-        // Hide completion panels initially
         if (levelCompletePanel) levelCompletePanel.SetActive(false);
-        if (gameCompletePanel) gameCompletePanel.SetActive(false);
-        
-        // Hide all error icons initially
         if (cameraErrorIcon) cameraErrorIcon.SetActive(false);
+        
         for (int i = 0; i < 3; i++)
         {
             if (intensityErrorIcons[i]) intensityErrorIcons[i].SetActive(false);
             if (colorErrorIcons[i]) colorErrorIcons[i].SetActive(false);
         }
         
-        // Update UI to match initial state
-        UpdateUI();
+        StartCoroutine(ForceSliderUpdate());
+    }
+
+    private void InitializeSliders()
+    {
+        for (int i = 0; i < intensitySliders.Length; i++)
+        {
+            if (intensitySliders[i] != null)
+            {
+                intensitySliders[i].minValue = 0;
+                intensitySliders[i].maxValue = 10;
+                intensitySliders[i].wholeNumbers = true;
+                intensitySliders[i].value = 0;
+                intensitySliders[i].SetValueWithoutNotify(0);
+
+                int index = i;
+                intensitySliders[i].onValueChanged.AddListener((float value) => {
+                    if (lightController != null)
+                    {
+                        lightController.SetIntensity(index, value);
+                        // Eliminada la llamada a UpdateLightLabel
+                    }
+                });
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator ForceSliderUpdate()
+    {
+        yield return null;
+        
+        if (GameManager.Instance != null && GameManager.Instance.currentLevel != null)
+        {
+            for (int i = 0; i < intensitySliders.Length; i++)
+            {
+                if (i < GameManager.Instance.currentLevel.targetLightSettings.Length && 
+                    intensitySliders[i] != null)
+                {
+                    float maxIntensity = Mathf.Max(8f, 
+                        GameManager.Instance.currentLevel.targetLightSettings[i].maxIntensity + 0.5f);
+                    intensitySliders[i].maxValue = maxIntensity;
+                }
+            }
+        }
+
+        for (int i = 0; i < intensitySliders.Length; i++)
+        {
+            if (intensitySliders[i] != null)
+            {
+                intensitySliders[i].value = 0;
+                intensitySliders[i].SetValueWithoutNotify(0);
+            }
+        }
     }
     
     public void UpdateUI()
     {
-        // Update camera text
         if (cameraText && cameraController) 
             cameraText.text = $"Camera {cameraController.CurrentCameraIndex + 1}";
         
-        // Update light sliders and colors
         for (int i = 0; i < intensitySliders.Length; i++)
         {
             if (lightController && i < lightController.lights.Length && lightController.lights[i] != null)
@@ -125,16 +143,8 @@ public class UIManager : MonoBehaviour
                 if (colorButtons[i])
                     colorButtons[i].color = lightController.lights[i].color;
                 
-                UpdateLightLabel(i);
+                // Eliminada la llamada a UpdateLightLabel
             }
-        }
-    }
-    
-    private void UpdateLightLabel(int index)
-    {
-        if (lightLabels[index] && lightController && index < lightController.lights.Length && lightController.lights[index] != null)
-        {
-            lightLabels[index].text = $"Light {index+1}: {lightController.lights[index].intensity:F1}";
         }
     }
     
@@ -142,19 +152,17 @@ public class UIManager : MonoBehaviour
     {
         if (lightController == null || lightController.lights[lightIndex] == null) return;
         
-        // Simple color cycling through predefined colors
         Color[] colorOptions = new Color[] 
         {
-            Color.white,     // (1,1,1)
-            Color.red,       // (1,0,0)
-            Color.green,     // (0,1,0)
-            Color.blue,      // (0,0,1)
-            Color.yellow,    // (1,1,0)
-            Color.cyan,      // (0,1,1)
-            Color.magenta    // (1,0,1)
+            Color.white,
+            Color.red,
+            Color.green,
+            Color.blue,
+            Color.yellow,
+            Color.cyan,
+            Color.magenta
         };
         
-        // Find the closest current color
         Color currentColor = lightController.lights[lightIndex].color;
         int closestIndex = 0;
         float minDistance = float.MaxValue;
@@ -169,31 +177,30 @@ public class UIManager : MonoBehaviour
             }
         }
         
-        // Move to the next color
         int nextIndex = (closestIndex + 1) % colorOptions.Length;
-        
-        // Apply the color to both the light and the UI button
-        lightController.lights[lightIndex].color = colorOptions[nextIndex];
+        lightController.ChangeColor(lightIndex, colorOptions[nextIndex]);
         
         if (colorButtons[lightIndex] != null)
         {
             colorButtons[lightIndex].color = colorOptions[nextIndex];
         }
-        
-        // Log for debugging
-        Debug.Log($"Changed light {lightIndex} color to: {colorOptions[nextIndex]}");
     }
     
     public void ShowCaptureResults(bool correctCamera, bool[] intensityCorrect, bool[] colorCorrect)
     {
-        // Show camera error icon if needed
         if (cameraErrorIcon) cameraErrorIcon.SetActive(!correctCamera);
         
-        // Show intensity and color error icons if needed
         for (int i = 0; i < 3; i++)
         {
-            if (intensityErrorIcons[i]) intensityErrorIcons[i].SetActive(!intensityCorrect[i]);
-            if (colorErrorIcons[i]) colorErrorIcons[i].SetActive(!colorCorrect[i]);
+            if (i < intensityErrorIcons.Length && intensityErrorIcons[i] != null)
+            {
+                intensityErrorIcons[i].SetActive(!intensityCorrect[i]);
+            }
+            
+            if (i < colorErrorIcons.Length && colorErrorIcons[i] != null)
+            {
+                colorErrorIcons[i].SetActive(!colorCorrect[i]);
+            }
         }
     }
     
@@ -202,14 +209,26 @@ public class UIManager : MonoBehaviour
         if (levelCompletePanel) 
         {
             levelCompletePanel.SetActive(true);
+            
+            if (SceneManager.GetActiveScene().name == "TutorialMinijuego2")
+            {
+                levelCompleteText.text = "Level Complete!";
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next Level";
+                nextLevelButton.onClick.RemoveAllListeners();
+                nextLevelButton.onClick.AddListener(() => {
+                    SceneManager.LoadScene("Minijuego2Level1");
+                });
+            }
+            else // Para Minijuego2Level1
+            {
+                levelCompleteText.text = "Game Complete!";
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Lobby";
+                nextLevelButton.onClick.RemoveAllListeners();
+                nextLevelButton.onClick.AddListener(() => {
+                    SceneManager.LoadScene("Lobby");
+                });
+            }
         }
     }
-    
-    public void ShowGameCompleteUI()
-    {
-        if (gameCompletePanel) 
-        {
-            gameCompletePanel.SetActive(true);
-        }
-    }
+
 }

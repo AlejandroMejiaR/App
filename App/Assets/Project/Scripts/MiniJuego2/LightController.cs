@@ -4,8 +4,8 @@ public class LightController : MonoBehaviour
 {
     public Light[] lights = new Light[3];
     
-    [Range(0.1f, 10f)]
-    public float intensityStep = 0.1f;
+    [Range(5f, 10f)]
+    public float intensityStep = 5f;
     
     private void Start()
     {
@@ -23,8 +23,7 @@ public class LightController : MonoBehaviour
     {
         if (lightIndex < 0 || lightIndex >= lights.Length || lights[lightIndex] == null) return;
         
-        lights[lightIndex].intensity = Mathf.Clamp(value, 0, 8);
-        Debug.Log($"Light {lightIndex} intensity set to: {lights[lightIndex].intensity}");
+        lights[lightIndex].intensity = value;
     }
     
     public void ChangeColor(int lightIndex, Color newColor)
@@ -32,7 +31,6 @@ public class LightController : MonoBehaviour
         if (lightIndex < 0 || lightIndex >= lights.Length || lights[lightIndex] == null) return;
         
         lights[lightIndex].color = newColor;
-        Debug.Log($"Light {lightIndex} color changed to: {newColor}");
     }
     
     public bool IsLightInTargetRange(int lightIndex)
@@ -44,11 +42,10 @@ public class LightController : MonoBehaviour
         
         var targetSettings = GameManager.Instance.currentLevel.targetLightSettings[lightIndex];
         
-        // Check intensity range
-        bool intensityInRange = lights[lightIndex].intensity >= targetSettings.minIntensity && 
-                                lights[lightIndex].intensity <= targetSettings.maxIntensity;
+        float intensity = lights[lightIndex].intensity;
+        bool intensityInRange = intensity >= targetSettings.minIntensity && 
+                                intensity <= targetSettings.maxIntensity;
         
-        // Check color tolerance
         bool colorMatches = ColorDifference(lights[lightIndex].color, targetSettings.targetColor) <= targetSettings.colorTolerance;
         
         return intensityInRange && colorMatches;
@@ -62,8 +59,11 @@ public class LightController : MonoBehaviour
             return false;
             
         var targetSettings = GameManager.Instance.currentLevel.targetLightSettings[lightIndex];
-        return lights[lightIndex].intensity >= targetSettings.minIntensity && 
-                lights[lightIndex].intensity <= targetSettings.maxIntensity;
+        
+        float intensity = lights[lightIndex].intensity;
+        
+        return intensity >= targetSettings.minIntensity && 
+                intensity <= targetSettings.maxIntensity;
     }
     
     public bool IsColorInTargetRange(int lightIndex)
@@ -74,18 +74,16 @@ public class LightController : MonoBehaviour
             return false;
             
         var targetSettings = GameManager.Instance.currentLevel.targetLightSettings[lightIndex];
-        return ColorDifference(lights[lightIndex].color, targetSettings.targetColor) <= targetSettings.colorTolerance;
+        float diff = ColorDifference(lights[lightIndex].color, targetSettings.targetColor);
+        
+        return diff <= targetSettings.colorTolerance;
     }
     
     private float ColorDifference(Color a, Color b)
     {
-        // Calculate Euclidean distance in RGB space (more precise)
         float rDiff = a.r - b.r;
         float gDiff = a.g - b.g;
         float bDiff = a.b - b.b;
-        
-        // Add some debug information
-        Debug.Log($"Color comparison: Light({a.r},{a.g},{a.b}) Target({b.r},{b.g},{b.b}) Diff: {Mathf.Sqrt(rDiff*rDiff + gDiff*gDiff + bDiff*bDiff)}");
         
         return Mathf.Sqrt(rDiff*rDiff + gDiff*gDiff + bDiff*bDiff);
     }

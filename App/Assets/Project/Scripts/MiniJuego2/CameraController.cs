@@ -26,8 +26,6 @@ public class CameraController : MonoBehaviour
         // Enable new camera
         currentCameraIndex = index;
         cameras[currentCameraIndex].gameObject.SetActive(true);
-        
-        Debug.Log($"Switched to camera {currentCameraIndex}");
     }
     
     public void NextCamera()
