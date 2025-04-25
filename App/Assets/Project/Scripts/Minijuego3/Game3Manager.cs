@@ -278,27 +278,46 @@ public class Game3Manager : MonoBehaviour
 
     private void ShowResults(Solution solution)
     {
+        // Actualiza los resultados
         string results = $"<b>Resultados de tu decisión:</b>\n\n" +
-                         $"• Adaptabilidad Tecnológica: {(solution.techAdaptabilityImpact >= 0 ? "+" : "")}{solution.techAdaptabilityImpact}\n" +
-                         $"• Eficiencia Operativa: {(solution.operationalEfficiencyImpact >= 0 ? "+" : "")}{solution.operationalEfficiencyImpact}\n" +
-                         $"• Satisfacción del Cliente: {(solution.customerSatisfactionImpact >= 0 ? "+" : "")}{solution.customerSatisfactionImpact}\n" +
-                         $"• Presupuesto: {solution.budgetImpact}€\n\n" +
-                         $"<b>Estado actual de la empresa:</b>\n" +
-                         $"• Adaptabilidad Tecnológica: {techAdaptability}%\n" +
-                         $"• Eficiencia Operativa: {operationalEfficiency}%\n" +
-                         $"• Satisfacción del Cliente: {customerSatisfaction}%\n" +
-                         $"• Presupuesto Restante: {budget}€";
+                        $"• Adaptabilidad Tecnológica: {(solution.techAdaptabilityImpact >= 0 ? "+" : "")}{solution.techAdaptabilityImpact}\n" +
+                        $"• Eficiencia Operativa: {(solution.operationalEfficiencyImpact >= 0 ? "+" : "")}{solution.operationalEfficiencyImpact}\n" +
+                        $"• Satisfacción del Cliente: {(solution.customerSatisfactionImpact >= 0 ? "+" : "")}{solution.customerSatisfactionImpact}\n" +
+                        $"• Presupuesto: {solution.budgetImpact}€\n\n" +
+                        $"<b>Estado actual de la empresa:</b>\n" +
+                        $"• Adaptabilidad Tecnológica: {techAdaptability}%\n" +
+                        $"• Eficiencia Operativa: {operationalEfficiency}%\n" +
+                        $"• Satisfacción del Cliente: {customerSatisfaction}%\n" +
+                        $"• Presupuesto Restante: {budget}€";
 
         resultsText.text = results;
+
+        // Ocultar el panel de problemas
+        problemDescriptionText.gameObject.SetActive(false);
+        solutionAText.gameObject.SetActive(false);
+        solutionBText.gameObject.SetActive(false);
+        solutionCText.gameObject.SetActive(false);
+
+        // Mostrar el panel de resultados
         resultsPanel.SetActive(true);
     }
 
+    // Método para continuar al siguiente problema
     public void ContinueToNextProblem()
     {
-        if (gameEnded) return;
-        
+        // Volver a bloquear el cursor cuando el jugador continúe al siguiente problema
+        FindObjectOfType<FirstPersonCamera>().LockCursor();
+
+        // Continuar con el flujo del juego
         currentProblemIndex++;
-        PresentProblem();
+        if (currentProblemIndex >= businessProblems.Count)
+        {
+            Victory();
+        }
+        else
+        {
+            PresentProblem();
+        }
     }
 
     private void CheckGameState()
