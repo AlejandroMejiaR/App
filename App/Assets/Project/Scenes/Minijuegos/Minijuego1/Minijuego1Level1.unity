@@ -389,7 +389,7 @@ MonoBehaviour:
   - {fileID: 386826709}
   winMessagePanel: {fileID: 613128822}
   verificationDelay: 1
-  victoryAnimationHeight: -3.2
+  victoryAnimationHeight: -3.29
   zoneLowerHeight: -1
   animationDuration: 1
   victoryDelay: 1
@@ -999,8 +999,8 @@ Transform:
   m_GameObject: {fileID: 103122141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.6, y: 0.012, z: -94.4}
-  m_LocalScale: {x: 126.4, y: 0.1, z: 27.310396}
+  m_LocalPosition: {x: -25.9, y: 0.012, z: -94.4}
+  m_LocalScale: {x: 126.12, y: 0.1, z: 27.310396}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2470,7 +2470,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.3, y: 0.05, z: -94.3}
-  m_LocalScale: {x: 100.02507, y: 0.024725078, z: 16}
+  m_LocalScale: {x: 100.02507, y: 0.024725078, z: 16.384}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
