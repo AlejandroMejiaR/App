@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -42,6 +43,7 @@ public class Game3Manager : MonoBehaviour
     private int currentProblemIndex = 0;
 
     [Header("UI Referencias")]
+    public GameObject problemsPanel;
     public TextMeshProUGUI problemDescriptionText;
     public TextMeshProUGUI solutionAText;
     public TextMeshProUGUI solutionBText;
@@ -55,12 +57,44 @@ public class Game3Manager : MonoBehaviour
     [Header("UI Controller")]
     public UIController uiController; // Nueva referencia
 
+    [Header("3D Buttons (asigna en el Inspector)")]
+    public List<InteractiveButton3D> solutionCubes;      // Los 3 cubos de solución
+    public InteractiveButton3D continueCube;             // El cubo “Continue”
+    public TextMeshProUGUI continueCubeText;                 // El texto 3D que dice “Continuar” / “Reintentar” / “Regresar”
+    public MeshRenderer continueCubeRenderer;            // Para cambiarle el color al cubo
+
+    [Header("Colores Continue")]
+    public Color defaultContinueColor = Color.white;
+    public Color gameOverContinueColor = Color.red;
+    public Color victoryContinueColor = Color.green;
+
     private bool gameEnded = false;
 
     private void Start()
     {
         InitializeBusinessProblems();
-        UpdateUI();
+        SetupForProblem();
+    }
+
+    private void SetupForProblem()
+    {
+        // UI Panels
+        problemsPanel.SetActive(true);
+        resultsPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        victoryPanel.SetActive(false);
+
+        // Reset botones
+        foreach (var btn in solutionCubes)
+        {
+            btn.isButtonInteractable = true;
+        }
+
+        continueCube.isButtonInteractable = false;
+        continueCubeText.text = "Continuar";
+        continueCubeRenderer.material.color = defaultContinueColor;
+
+        // Presentar el primer (o siguiente) problema
         PresentProblem();
     }
 
@@ -222,6 +256,7 @@ public class Game3Manager : MonoBehaviour
         businessProblems.Add(dataAnalysis);
     }
 
+
     private void PresentProblem()
     {
         if (currentProblemIndex >= businessProblems.Count)
@@ -265,6 +300,16 @@ public class Game3Manager : MonoBehaviour
         ShowResults(selectedSolution);
     }
 
+    private void DisableCubes()
+    {
+        // Desactivar todos los cubos (botones)
+        var buttons = FindObjectsOfType<InteractiveButton3D>();
+        foreach (var button in buttons)
+        {
+            button.DisableButton(); // Desactivamos la interacción de los cubos
+        }
+    }
+
     private void ApplySolutionEffects(Solution solution)
     {
         techAdaptability = Mathf.Clamp(techAdaptability + solution.techAdaptabilityImpact, minAttributeValue, maxAttributeValue);
@@ -290,33 +335,47 @@ public class Game3Manager : MonoBehaviour
                         $"• Satisfacción del Cliente: {customerSatisfaction}%\n" +
                         $"• Presupuesto Restante: {budget}€";
 
-        resultsText.text = results;
+        // Actualizar resultados en el panel
+        resultsText.text = $"Resultados de la decisión: {solution.description}";
+        problemsPanel.SetActive(false);
+        if(!gameEnded){
+            resultsPanel.SetActive(true);
+        }
 
-        // Ocultar el panel de problemas
-        problemDescriptionText.gameObject.SetActive(false);
-        solutionAText.gameObject.SetActive(false);
-        solutionBText.gameObject.SetActive(false);
-        solutionCText.gameObject.SetActive(false);
+        // Bloquea las soluciones y desbloquea Continue
+        foreach (var btn in solutionCubes)
+            btn.DisableButton();
 
-        // Mostrar el panel de resultados
-        resultsPanel.SetActive(true);
+        continueCube.isButtonInteractable = true;
+        //continueCubeText.text = "Continuar";
+        //continueCubeRenderer.material.color = defaultContinueColor;
     }
 
-    // Método para continuar al siguiente problema
     public void ContinueToNextProblem()
     {
-        // Volver a bloquear el cursor cuando el jugador continúe al siguiente problema
-        FindObjectOfType<FirstPersonCamera>().LockCursor();
-
-        // Continuar con el flujo del juego
         currentProblemIndex++;
         if (currentProblemIndex >= businessProblems.Count)
-        {
             Victory();
-        }
         else
-        {
             PresentProblem();
+    }
+
+
+    // Game3Manager.cs
+    public void OnContinueCubePressed()
+    {
+        if (!gameEnded)
+        {
+            ContinueToNextProblem();
+            SetupForProblem();
+        }
+        else if (gameOverPanel.activeSelf)
+        {
+            RestartGame();
+        }
+        else if (victoryPanel.activeSelf)
+        {
+            GoToLobby();
         }
     }
 
@@ -346,15 +405,31 @@ public class Game3Manager : MonoBehaviour
             reason = "La empresa se quedó sin fondos para operar.";
 
         gameOverText.text = $"¡Transformación Digital Fallida!\n\n{reason}";
+
+        // Mostrar Game Over
+        problemsPanel.SetActive(false);
+        resultsPanel.SetActive(false); // Añadir esta línea
         gameOverPanel.SetActive(true);
-        resultsPanel.SetActive(false);
+
+        // Prepara el cubo Continue como "Reintentar"
+        continueCube.isButtonInteractable = true;
+        continueCubeText.text = "Reintentar";
+        continueCube.hoverColor = gameOverContinueColor;
     }
 
     private void Victory()
     {
         gameEnded = true;
+
+        // Mostrar Victory
+        problemsPanel.SetActive(false);
+        resultsPanel.SetActive(false); // Añadir esta línea
         victoryPanel.SetActive(true);
-        resultsPanel.SetActive(false);
+
+        // Prepara el cubo Continue como "Regresar"
+        continueCube.isButtonInteractable = true;
+        continueCubeText.text = "Regresar";
+        continueCube.hoverColor = victoryContinueColor;
     }
 
     private void UpdateUI()
@@ -365,10 +440,19 @@ public class Game3Manager : MonoBehaviour
         }
     }
 
-
-
     public void RestartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
+
+    public void GoToLobby()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
+    }
+
 }
+
+
+
+
+
