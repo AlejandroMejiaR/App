@@ -336,7 +336,7 @@ public class Game3Manager : MonoBehaviour
                         $"• Presupuesto Restante: {budget}€";
 
         // Actualizar resultados en el panel
-        resultsText.text = $"Resultados de la decisión: {solution.description}";
+        resultsText.text = solution.description;
         problemsPanel.SetActive(false);
         if(!gameEnded){
             resultsPanel.SetActive(true);

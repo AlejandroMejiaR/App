@@ -41,7 +41,7 @@ public class UIController : MonoBehaviour
         operationalEfficiencySlider.value = gameManager.operationalEfficiency / 100f;
         customerSatisfactionSlider.value = gameManager.customerSatisfaction / 100f;
 
-        budgetText.text = $"Presupuesto: {gameManager.budget}€";
+        budgetText.text = $" ${gameManager.budget}";
 
         // Actualizar colores
         UpdateStatusColor(techAdaptabilitySlider, gameManager.techAdaptability);
