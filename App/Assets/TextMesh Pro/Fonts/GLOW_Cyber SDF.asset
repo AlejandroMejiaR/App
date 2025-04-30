@@ -158,9 +158,9 @@ MonoBehaviour:
     packingMode: 0
     atlasWidth: 512
     atlasHeight: 512
-    characterSetSelectionMode: 0
-    characterSequence: 32 - 126, 160, 8203, 8230, 9633
-    referencedFontAssetGUID: 
+    characterSetSelectionMode: 7
+    characterSequence: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\xF3\xD3"
+    referencedFontAssetGUID: 38d121532343f044598a288760ff5caa
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
