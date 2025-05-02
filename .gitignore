@@ -72,5 +72,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# no hacer seguiimiento a la carpeta main Room
+# no hacer seguimiento a la carpeta main Room
 App/Assets/Project/Main Room/*
+
+# no hacer seguimiento a la carpeta Library
+App/Library/*
