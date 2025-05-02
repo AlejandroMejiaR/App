@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Project/Scenes/Register.unity
-    guid: ca6ac007027efd24286afbf959ab4cb3
   - enabled: 1
     path: Assets/Project/Scenes/Login.unity
     guid: d882619563d760c4d96a9e9a0365ba8c
@@ -15,14 +12,23 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/MainMenu.unity
     guid: e7dd707a8bd884f41b78f6deced20ec0
   - enabled: 1
+    path: Assets/Project/Scenes/CH_Selection.unity
+    guid: c8393e872ea6235408ccbf279f622a74
+  - enabled: 1
     path: Assets/Project/Scenes/Lobby.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Project/Scenes/MiniGame01.unity
+    path: Assets/Project/Scenes/Minijuegos/Minijuego1/TutorialMinijuego1.unity
     guid: 2a5125b96175dd74ba4bf432c6de25e4
   - enabled: 1
-    path: Assets/Project/Scenes/CH_Selection.unity
-    guid: c8393e872ea6235408ccbf279f622a74
+    path: Assets/Project/Scenes/Minijuegos/Minijuego1/Minijuego1Level1.unity
+    guid: 78c4b0a05db05334da30840d62b86d82
+  - enabled: 1
+    path: Assets/Project/Scenes/Minijuegos/Miniijuego2/TutorialMinijuego2.unity
+    guid: 3edf4528e031e114b9a26a9bde69e6c8
+  - enabled: 1
+    path: Assets/Project/Scenes/Minijuegos/Miniijuego2/Minijuego2Level1.unity
+    guid: e200ba2abbd66c24a95acbc394fac4ac
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
