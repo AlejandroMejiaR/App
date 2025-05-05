@@ -24,8 +24,8 @@ public class CubeController2 : MonoBehaviour
     public void ResetPosition()
     {
         if (isLocked) return;
-
-        ClearSafeZone();
+        
+        ClearSafeZone(); // Limpia las referencias de la zona
         StartCoroutine(RiseToInitialPosition());
     }
     

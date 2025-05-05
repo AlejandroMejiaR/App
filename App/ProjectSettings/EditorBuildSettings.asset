@@ -29,6 +29,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Minijuegos/Miniijuego2/Minijuego2Level1.unity
     guid: e200ba2abbd66c24a95acbc394fac4ac
+  - enabled: 1
+    path: Assets/Project/Scenes/Minijuegos/Minijuego4/Minijuego4Level1.unity
+    guid: c0ae02a5705a5b84fa67cda7941fcc04
+  - enabled: 1
+    path: Assets/Project/Scenes/Minijuegos/Minijuego4/TutorialMinijuego4.unity
+    guid: 3cfc8a13f18eb1048b4577b4fb6f8817
+  - enabled: 1
+    path: Assets/Project/Scenes/Minijuegos/Miinijuego3/TutorialMinijuego3.unity
+    guid: af543b1a6c51f48459f7a9dc34e0eece
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -138,60 +138,63 @@ public class CubeGameManager2 : MonoBehaviour
                 continue;
             }
 
-            bool zoneCorrect = true;
+            bool hasIncorrectCube = false;
             foreach (CubeController2 cube in zone.currentCubes)
             {
                 if (cube.cubeID != zone.zoneID)
                 {
-                    zoneCorrect = false;
+                    hasIncorrectCube = true;
                     allCorrect = false;
                     break;
                 }
             }
             
-            zone.GetZoneRenderer().material.color = zoneCorrect ? zone.correctColor : zone.wrongColor;
+            zone.GetZoneRenderer().material.color = hasIncorrectCube ? zone.wrongColor : zone.correctColor;
         }
 
-        // Condiciones para continuar:
-        // 1. Todas las zonas deben tener al menos un cubo
-        // 2. Todos los cubos deben estar en la zona correcta
         if (!allZonesOccupied || !allCorrect)
         {
             yield return new WaitForSeconds(0.5f);
             
-            // Resetear solo las zonas incorrectas o vacías
+            // Segunda pasada: Eliminar solo los cubos incorrectos
             foreach (SafeZone2 zone in safeZones)
             {
-                bool shouldReset = false;
+                List<CubeController2> cubesToRemove = new List<CubeController2>();
                 
-                // Verificar si la zona está vacía o tiene cubos incorrectos
-                if (zone.currentCubes.Count == 0)
+                // Identificar cubos incorrectos
+                foreach (CubeController2 cube in zone.currentCubes)
                 {
-                    shouldReset = true;
+                    if (cube.cubeID != zone.zoneID)
+                    {
+                        cubesToRemove.Add(cube);
+                    }
                 }
-                else
+
+                // Eliminar solo los cubos incorrectos
+                foreach (CubeController2 cube in cubesToRemove)
                 {
+                    cube.Unlock();
+                    cube.ResetPosition();
+                    zone.ReleaseCube(cube);
+                }
+
+                // Actualizar color de la zona
+                if (zone.currentCubes.Count > 0)
+                {
+                    bool isCorrect = true;
                     foreach (CubeController2 cube in zone.currentCubes)
                     {
                         if (cube.cubeID != zone.zoneID)
                         {
-                            shouldReset = true;
+                            isCorrect = false;
                             break;
                         }
                     }
+                    zone.GetZoneRenderer().material.color = isCorrect ? zone.correctColor : zone.wrongColor;
                 }
-
-                if (shouldReset)
+                else
                 {
-                    List<CubeController2> cubesToRemove = new List<CubeController2>(zone.currentCubes);
-                    
-                    foreach (CubeController2 cube in cubesToRemove)
-                    {
-                        cube.Unlock();
-                        cube.ResetPosition();
-                    }
-                    
-                    zone.ResetZone();
+                    zone.GetZoneRenderer().material.color = zone.neutralColor;
                 }
             }
             
@@ -210,49 +213,6 @@ public class CubeGameManager2 : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         ShowVictoryMessage();
-    }
-
-    private IEnumerator VerifyCubesCoroutine()
-    {
-        yield return new WaitForSeconds(verificationDelay);
-
-        bool allCorrect = true;
-
-        // Iterar sobre cada zona segura y verificar todos los cubos en ella
-        foreach (SafeZone2 zone in safeZones)
-        {
-            bool zoneCorrect = true;
-            // Verificar todos los cubos dentro de la zona
-            foreach (CubeController2 cube in zone.currentCubes)
-            {
-                if (cube.cubeID != zone.zoneID)
-                {
-                    zoneCorrect = false;
-                    break;
-                }
-            }
-
-            // Cambiar el color de la zona en función de si todos los cubos son correctos
-            zone.GetZoneRenderer().material.color = zoneCorrect ? zone.correctColor : zone.wrongColor;  // Usamos GetZoneRenderer()
-
-            if (!zoneCorrect)
-            {
-                allCorrect = false;
-            }
-        }
-
-        if (allCorrect)
-        {
-            yield return new WaitForSeconds(victoryDelay);
-            ShowVictoryMessage();
-        }
-        else
-        {
-            // Si no todos los cubos están correctos, volver a intentar
-            StartCoroutine(HandleIncorrectPlacement());
-        }
-
-        isVerificationCompleted = true; // Marcar que la verificación se ha completado
     }
 
 
@@ -288,21 +248,51 @@ public class CubeGameManager2 : MonoBehaviour
         if (winMessagePanel != null)
         {
             winMessagePanel.SetActive(true);
+            ConfigureVictoryButton();
+            
+            // Buscar el botón de continuar en el panel de victoria
+            Button victoryContinueButton = winMessagePanel.GetComponentInChildren<Button>();
+            if (victoryContinueButton != null)
+            {
+                // Limpiar listeners previos y asignar el nuevo
+                victoryContinueButton.onClick.RemoveAllListeners();
+                
+                string currentScene = SceneManager.GetActiveScene().name;
+                if (currentScene == "TutorialMinijuego4")
+                {
+                    // Tutorial sigue siendo automático
+                    victoryContinueButton.onClick.AddListener(() => SceneManager.LoadScene("Minijuego4Level1"));
+                }
+                else if (currentScene == "Minijuego4Level1")
+                {
+                    // Nivel 1 requiere click para continuar
+                    victoryContinueButton.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
+                }
+            }
         }
 
+        // Eliminar la carga automática de escena que estaba aquí
+        Debug.Log("¡Victoria! Todos los cubos están correctamente colocados");
+    }
+
+        private void ConfigureVictoryButton()
+    {
+        if (winMessagePanel == null) return;
+        
+        Button victoryButton = winMessagePanel.GetComponentInChildren<Button>();
+        if (victoryButton == null) return;
+        
+        victoryButton.onClick.RemoveAllListeners();
+        
         string currentScene = SceneManager.GetActiveScene().name;
         if (currentScene == "TutorialMinijuego4")
         {
-            // Si gana el tutorial, cambiar a Minijuego4Level1
-            SceneManager.LoadScene("Minijuego4Level1");
+            victoryButton.onClick.AddListener(() => SceneManager.LoadScene("Minijuego4Level1"));
         }
         else if (currentScene == "Minijuego4Level1")
         {
-            // Si gana el nivel, cambiar a Lobby
-            SceneManager.LoadScene("Lobby");
+            victoryButton.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
         }
-
-        Debug.Log("¡Victoria! Todos los cubos están correctamente colocados");
     }
 
     private void GameOver()
