@@ -26,6 +26,10 @@ public class Game3Manager : MonoBehaviour
         public int budgetImpact;
     }
 
+    [HideInInspector] public int techAdaptabilityImpact;
+    [HideInInspector] public int operationalEfficiencyImpact;
+    [HideInInspector] public int customerSatisfactionImpact;
+
     // Estado de la empresa
     [Header("Atributos de Empresa")]
     public int techAdaptability = 50;
@@ -103,30 +107,30 @@ public class Game3Manager : MonoBehaviour
         // Problema 1: Gestión de inventario
         BusinessProblem inventory = new BusinessProblem
         {
-            description = "La empresa necesita mejorar su sistema de gestión de inventario. ¿Qué solución implementarías?",
+            description = "Los clientes no reciben respuestas rápidas. La empresa necesita optimizar su canal de atención digital. ¿Cómo gestionas el problema de atención al cliente?",
             digitalSolution = new Solution
             {
-                description = "Implementar un sistema ERP completo con módulos de IA para predicción de inventario",
-                techAdaptabilityImpact = 30,
-                operationalEfficiencyImpact = 25,
-                customerSatisfactionImpact = 15,
-                budgetImpact = -500
+                description = "A) Instalar un chatbot con IA",
+                techAdaptabilityImpact = 15,
+                operationalEfficiencyImpact = 20,
+                customerSatisfactionImpact = 10,
+                budgetImpact = -3500
             },
             intermediateSolution = new Solution
             {
-                description = "Adoptar un software de gestión de inventario en la nube con actualización en tiempo real",
-                techAdaptabilityImpact = 20,
-                operationalEfficiencyImpact = 20,
-                customerSatisfactionImpact = 10,
-                budgetImpact = -300
+                description = "B) Sistema de turnos con recordatorios",
+                techAdaptabilityImpact = -10,
+                operationalEfficiencyImpact = -5,
+                customerSatisfactionImpact = 25,
+                budgetImpact = -2000
             },
             traditionalSolution = new Solution
             {
-                description = "Mejorar el sistema manual existente con hojas de cálculo más detalladas",
-                techAdaptabilityImpact = 5,
-                operationalEfficiencyImpact = 10,
-                customerSatisfactionImpact = 5,
-                budgetImpact = -100
+                description = "C) Contratar más personal telefónico",
+                techAdaptabilityImpact = -10,
+                operationalEfficiencyImpact = -5,
+                customerSatisfactionImpact = 25,
+                budgetImpact = -1000
             }
         };
         businessProblems.Add(inventory);
@@ -134,30 +138,30 @@ public class Game3Manager : MonoBehaviour
         // Problema 2: Atención al cliente
         BusinessProblem customerService = new BusinessProblem
         {
-            description = "Los clientes se quejan de tiempos de respuesta lentos. ¿Cómo mejorarías la atención al cliente?",
+            description = "Tu tienda física funciona, pero no estás vendiendo nada en línea. Estás perdiendo un segmento enorme del mercado digital.¿Cómo digitalizas tu canal de ventas?",
             digitalSolution = new Solution
             {
-                description = "Implementar un sistema de chatbots con IA y análisis de sentimientos para atención 24/7",
+                description = "A) Crear un e-commerce propio con pasarela de pagos",
                 techAdaptabilityImpact = 25,
-                operationalEfficiencyImpact = 20,
-                customerSatisfactionImpact = 20,
-                budgetImpact = -450
+                operationalEfficiencyImpact = 25,
+                customerSatisfactionImpact = 10,
+                budgetImpact = -5000
             },
             intermediateSolution = new Solution
             {
-                description = "Crear un portal de autoservicio online con tickets de soporte y FAQs interactivas",
-                techAdaptabilityImpact = 15,
+                description = "B) Vender por plataformas externas (Rappi, Instagram Shop)",
+                techAdaptabilityImpact = 10,
                 operationalEfficiencyImpact = 15,
-                customerSatisfactionImpact = 15,
-                budgetImpact = -250
+                customerSatisfactionImpact = 5,
+                budgetImpact = -2500
             },
             traditionalSolution = new Solution
             {
-                description = "Contratar más personal de atención al cliente y establecer procesos estandarizados",
-                techAdaptabilityImpact = 0,
-                operationalEfficiencyImpact = 10,
-                customerSatisfactionImpact = 10,
-                budgetImpact = -200
+                description = "C) Tomar pedidos por WhatsApp con catálogo PDF",
+                techAdaptabilityImpact = -10,
+                operationalEfficiencyImpact = 5,
+                customerSatisfactionImpact = 20,
+                budgetImpact = -1000
             }
         };
         businessProblems.Add(customerService);
@@ -165,30 +169,30 @@ public class Game3Manager : MonoBehaviour
         // Problema 3: Marketing y ventas
         BusinessProblem marketing = new BusinessProblem
         {
-            description = "Las ventas están estancadas y necesitamos nuevas estrategias de marketing. ¿Qué enfoque tomarías?",
+            description = "Tus procesos internos están desorganizados. Cada equipo usa sus propios métodos y la información no fluye bien. ¿Cómo organizas los procesos internos de la empresa? ",
             digitalSolution = new Solution
             {
-                description = "Implementar una plataforma de marketing omnicanal con análisis predictivo y personalización",
-                techAdaptabilityImpact = 25,
-                operationalEfficiencyImpact = 15,
-                customerSatisfactionImpact = 30,
-                budgetImpact = -500
+                description = "A) Instalar un ERP en la nube con integración total",
+                techAdaptabilityImpact = 30,
+                operationalEfficiencyImpact = 30,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -6000
             },
             intermediateSolution = new Solution
             {
-                description = "Crear campañas digitales en redes sociales con análisis básico de datos",
-                techAdaptabilityImpact = 15,
-                operationalEfficiencyImpact = 10,
-                customerSatisfactionImpact = 20,
-                budgetImpact = -250
+                description = "B) Usar herramientas gratuitas (Sheets, Trello)",
+                techAdaptabilityImpact = 5,
+                operationalEfficiencyImpact = 15,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -2000
             },
             traditionalSolution = new Solution
             {
-                description = "Aumentar la publicidad tradicional (folletos, radio, carteles) y las promociones en tienda",
-                techAdaptabilityImpact = 0,
-                operationalEfficiencyImpact = 5,
-                customerSatisfactionImpact = 10,
-                budgetImpact = -150
+                description = "C) Coordinarse por correo entre áreas",
+                techAdaptabilityImpact = -15,
+                operationalEfficiencyImpact = -10,
+                customerSatisfactionImpact = +15,
+                budgetImpact = -500
             }
         };
         businessProblems.Add(marketing);
@@ -196,30 +200,30 @@ public class Game3Manager : MonoBehaviour
         // Problema 4: Comunicación interna
         BusinessProblem communication = new BusinessProblem
         {
-            description = "La comunicación interna entre departamentos es ineficiente. ¿Qué solución implementarías?",
+            description = "El equipo no se siente cómodo con las nuevas herramientas digitales. Algunos se resisten al cambio o prefieren los métodos anteriores. ¿Cómo enfrentas la resistencia al cambio del personal? ",
             digitalSolution = new Solution
             {
-                description = "Implementar una plataforma colaborativa empresarial con IA para gestión del conocimiento",
-                techAdaptabilityImpact = 20,
-                operationalEfficiencyImpact = 25,
+                description = "A) Implementar una plataforma de e-learning gamificada",
+                techAdaptabilityImpact = 30,
+                operationalEfficiencyImpact = 10,
                 customerSatisfactionImpact = 10,
-                budgetImpact = -400
+                budgetImpact = -3000
             },
             intermediateSolution = new Solution
             {
-                description = "Adoptar herramientas de comunicación en la nube con funciones básicas de colaboración",
-                techAdaptabilityImpact = 15,
-                operationalEfficiencyImpact = 15,
+                description = "B) Hacer talleres presenciales internos",
+                techAdaptabilityImpact = 10,
+                operationalEfficiencyImpact = -5,
                 customerSatisfactionImpact = 5,
-                budgetImpact = -200
+                budgetImpact = -1500
             },
             traditionalSolution = new Solution
             {
-                description = "Establecer reuniones regulares estructuradas y mejorar los canales de comunicación existentes",
-                techAdaptabilityImpact = 0,
-                operationalEfficiencyImpact = 10,
-                customerSatisfactionImpact = 5,
-                budgetImpact = -50
+                description = "C) Asignar compañeros expertos como apoyo informal",
+                techAdaptabilityImpact = -25,
+                operationalEfficiencyImpact = 5,
+                customerSatisfactionImpact = -20,
+                budgetImpact = 0
             }
         };
         businessProblems.Add(communication);
@@ -227,33 +231,64 @@ public class Game3Manager : MonoBehaviour
         // Problema 5: Análisis de datos
         BusinessProblem dataAnalysis = new BusinessProblem
         {
-            description = "Necesitamos mejorar la toma de decisiones basada en datos. ¿Qué enfoque elegirías?",
+            description = "Tu empresa no está llegando a nuevos clientes. Dependías del voz a voz, pero ya no es suficiente para crecer. ¿Cómo mejoras el alcance y visibilidad de tu negocio?",
             digitalSolution = new Solution
             {
-                description = "Implementar una plataforma avanzada de Big Data con analítica predictiva y dashboards personalizados",
-                techAdaptabilityImpact = 30,
-                operationalEfficiencyImpact = 25,
-                customerSatisfactionImpact = 20,
-                budgetImpact = -550
+                description = "A) Lanzar campañas digitales automatizadas y segmentadas (Meta Ads, Google Ads)",
+                techAdaptabilityImpact = 25,
+                operationalEfficiencyImpact = 20,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -4500
             },
             intermediateSolution = new Solution
             {
-                description = "Adoptar herramientas de BI (Business Intelligence) en la nube con visualizaciones básicas",
-                techAdaptabilityImpact = 20,
-                operationalEfficiencyImpact = 15,
-                customerSatisfactionImpact = 10,
-                budgetImpact = -300
+                description = "B) Contratar un community manager para contenido orgánico",
+                techAdaptabilityImpact = 10,
+                operationalEfficiencyImpact = 5,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -2000
             },
             traditionalSolution = new Solution
             {
-                description = "Mejorar los informes manuales y contratar un analista de datos para informes periódicos",
-                techAdaptabilityImpact = 5,
-                operationalEfficiencyImpact = 10,
-                customerSatisfactionImpact = 5,
-                budgetImpact = -150
+                description = "C) Imprimir volantes y hacer publicidad física local",
+                techAdaptabilityImpact = -10,
+                operationalEfficiencyImpact = -5,
+                customerSatisfactionImpact = 20,
+                budgetImpact = -500
             }
         };
         businessProblems.Add(dataAnalysis);
+
+        // Problema 6: Protección de infomarción
+        BusinessProblem dataProtection = new BusinessProblem
+        {
+            description = "La empresa almacena datos de clientes pero no tiene políticas de seguridad adecuadas. ¿Cómo proteges los datos sensibles de tus clientes?",
+            digitalSolution = new Solution
+            {
+                description = "A) Implementar firewall corporativo y protocolos de ciberseguridad",
+                techAdaptabilityImpact = 25,
+                operationalEfficiencyImpact = 20,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -4000
+            },
+            intermediateSolution = new Solution
+            {
+                description = "B) Usar antivirus gratuito y crear contraseñas seguras manualmente",
+                techAdaptabilityImpact = 10,
+                operationalEfficiencyImpact = 5,
+                customerSatisfactionImpact = 5,
+                budgetImpact = -1500
+            },
+            traditionalSolution = new Solution
+            {
+                description = "C) No hacer cambios, confiar en la responsabilidad individual",
+                techAdaptabilityImpact = -20,
+                operationalEfficiencyImpact = -10,
+                customerSatisfactionImpact = 20,
+                budgetImpact = -500
+            }
+        };
+        businessProblems.Add(dataProtection);
     }
 
 
@@ -312,10 +347,16 @@ public class Game3Manager : MonoBehaviour
 
     private void ApplySolutionEffects(Solution solution)
     {
+        // ← AGREGAR ESTO ANTES DE APLICAR LOS CAMBIOS A LOS VALORES
+        techAdaptabilityImpact = solution.techAdaptabilityImpact;
+        operationalEfficiencyImpact = solution.operationalEfficiencyImpact;
+        customerSatisfactionImpact = solution.customerSatisfactionImpact;
+
         techAdaptability = Mathf.Clamp(techAdaptability + solution.techAdaptabilityImpact, minAttributeValue, maxAttributeValue);
         operationalEfficiency = Mathf.Clamp(operationalEfficiency + solution.operationalEfficiencyImpact, minAttributeValue, maxAttributeValue);
         customerSatisfaction = Mathf.Clamp(customerSatisfaction + solution.customerSatisfactionImpact, minAttributeValue, maxAttributeValue);
         budget += solution.budgetImpact;
+
 
         UpdateUI();
         CheckGameState();

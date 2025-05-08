@@ -159,7 +159,7 @@ MonoBehaviour:
     atlasWidth: 512
     atlasHeight: 512
     characterSetSelectionMode: 7
-    characterSequence: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\xF3\xD3"
+    characterSequence: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\xF3\xD3\xE1\xFA\xDA\xCD\xF3"
     referencedFontAssetGUID: 38d121532343f044598a288760ff5caa
     referencedTextAssetGUID: 
     fontStyle: 0
