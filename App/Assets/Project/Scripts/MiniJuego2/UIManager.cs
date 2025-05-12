@@ -212,8 +212,8 @@ public class UIManager : MonoBehaviour
             
             if (SceneManager.GetActiveScene().name == "TutorialMinijuego2")
             {
-                levelCompleteText.text = "Level Complete!";
-                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next Level";
+                levelCompleteText.text = "¡Nivel Completado!";
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Siguiente Nivel";
                 nextLevelButton.onClick.RemoveAllListeners();
                 nextLevelButton.onClick.AddListener(() => {
                     SceneManager.LoadScene("Minijuego2Level1");
@@ -221,7 +221,7 @@ public class UIManager : MonoBehaviour
             }
             else // Para Minijuego2Level1
             {
-                levelCompleteText.text = "Game Complete!";
+                levelCompleteText.text = "¡Juego Completado!";
                 nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Lobby";
                 nextLevelButton.onClick.RemoveAllListeners();
                 nextLevelButton.onClick.AddListener(() => {
