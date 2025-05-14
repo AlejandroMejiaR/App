@@ -2216,6 +2216,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: a3f85e845a5e739449545f7110b41387, type: 2}
+  musicSource: {fileID: 1253870549}
+  sceneAudioList:
+  - sceneName: MainMenu
+    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+  - sceneName: CH_Selection
+    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+  - sceneName: Lobby
+    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+  - sceneName: TutorialMinijuego1
+    clip: {fileID: 8300000, guid: 559895c30cdf98d41882ab71e9b4ac87, type: 3}
+  - sceneName: Minijuego1Level1
+    clip: {fileID: 8300000, guid: 559895c30cdf98d41882ab71e9b4ac87, type: 3}
+  - sceneName: TutorialMinijuego2
+    clip: {fileID: 8300000, guid: 4b58eb6a76d38244caf280d6bc95702c, type: 3}
+  - sceneName: Minijuego2Level1
+    clip: {fileID: 8300000, guid: 4b58eb6a76d38244caf280d6bc95702c, type: 3}
+  - sceneName: TutorialMinijuego3
+    clip: {fileID: 8300000, guid: 6ad69fb6ecce3ec439cb4b3a0bda154a, type: 3}
+  - sceneName: TutorialMinijuego4
+    clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
+  - sceneName: TutorialMinijuego4
+    clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
 --- !u!4 &1253870548
 Transform:
   m_ObjectHideFlags: 0
@@ -2241,7 +2263,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1790067095345112888, guid: a3f85e845a5e739449545f7110b41387, type: 2}
-  m_audioClip: {fileID: 8300000, guid: be3d72417e08fd54fa7b037afbe3013d, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: be3d72417e08fd54fa7b037afbe3013d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2338,7 +2360,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7995399395077643609, guid: a3f85e845a5e739449545f7110b41387, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 0cab05ecfaa5f9e43a6d976b2a995b1e, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0cab05ecfaa5f9e43a6d976b2a995b1e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
