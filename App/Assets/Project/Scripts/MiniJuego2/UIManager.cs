@@ -221,8 +221,8 @@ public class UIManager : MonoBehaviour
             }
             else // Para Minijuego2Level1
             {
-                levelCompleteText.text = "¡Juego Completado!";
-                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Lobby";
+                levelCompleteText.text = "¡Felicitaciones!";
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "Continuar";
                 nextLevelButton.onClick.RemoveAllListeners();
                 nextLevelButton.onClick.AddListener(() => {
                     SceneManager.LoadScene("Lobby");

@@ -50,22 +50,29 @@ public class LightController : MonoBehaviour
         
         return intensityInRange && colorMatches;
     }
-    
+
     public bool IsIntensityInTargetRange(int lightIndex)
     {
-        if (lightIndex < 0 || lightIndex >= lights.Length || lights[lightIndex] == null || 
-            GameManager.Instance == null || GameManager.Instance.currentLevel == null || 
-            GameManager.Instance.currentLevel.targetLightSettings.Length <= lightIndex) 
+        if (lightIndex < 0 || lightIndex >= lights.Length || lights[lightIndex] == null ||
+            GameManager.Instance == null || GameManager.Instance.currentLevel == null ||
+            GameManager.Instance.currentLevel.targetLightSettings.Length <= lightIndex)
             return false;
-            
+
         var targetSettings = GameManager.Instance.currentLevel.targetLightSettings[lightIndex];
-        
+
         float intensity = lights[lightIndex].intensity;
-        
-        return intensity >= targetSettings.minIntensity && 
-                intensity <= targetSettings.maxIntensity;
+
+        // Validar que la intensidad esté dentro del rango total permitido
+        if (intensity < targetSettings.minIntensity || intensity > targetSettings.maxIntensity)
+            return false;
+
+        // Validar que la intensidad esté dentro del rango correcto
+        bool intensityInCorrectRange = intensity >= targetSettings.correctMinIntensity && intensity <= targetSettings.correctMaxIntensity;
+
+        return intensityInCorrectRange;
     }
-    
+
+
     public bool IsColorInTargetRange(int lightIndex)
     {
         if (lightIndex < 0 || lightIndex >= lights.Length || lights[lightIndex] == null || 
