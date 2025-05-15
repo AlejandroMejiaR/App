@@ -1,36 +1,74 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance; // Instancia Singleton
+    public static AudioManager instance;
     [SerializeField] private AudioMixer audioMixer;
+
+    [Header("Módulo de música por escena")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private List<SceneAudio> sceneAudioList;
+
+    [System.Serializable]
+    public class SceneAudio
+    {
+        public string sceneName;   // Nombre exacto de la escena
+        public AudioClip clip;     // Clip que quieres reproducir
+    }
 
     private void Awake()
     {
-        // Asegurarse de que solo haya una instancia del AudioManager
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // No destruir al cambiar de escena
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Si ya existe una instancia, destruir la nueva
+            Destroy(gameObject);
+            return;
+        }
+
+        if (musicSource == null)
+            musicSource = GetComponent<AudioSource>();
+
+        musicSource.loop = true;
+        musicSource.playOnAwake = false;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayMusicForScene(scene.name);
+    }
+
+    private void PlayMusicForScene(string sceneName)
+    {
+        var entry = sceneAudioList.Find(e => e.sceneName == sceneName);
+        if (entry != null && entry.clip != musicSource.clip)
+        {
+            musicSource.clip = entry.clip;
+            musicSource.Play();
         }
     }
 
-    // Método para cambiar el volumen de la música
     public void CambiarVolumenMusica(float volumen)
     {
         audioMixer.SetFloat("VolumenMusica", volumen);
     }
 
-    // Método para cambiar el volumen de los efectos de sonido
     public void CambiarVolumenSFX(float volumen)
     {
         audioMixer.SetFloat("VolumenSFX", volumen);
     }
-
- 
 }

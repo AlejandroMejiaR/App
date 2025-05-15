@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class InteractiveButton3D : MonoBehaviour
 {
@@ -120,4 +121,10 @@ public class InteractiveButton3D : MonoBehaviour
     {
         isButtonInteractable = false;
     }
+
+    public void Salir()
+    {
+        SceneManager.LoadScene("Lobby"); // Cambiado a escena de selección de personaje
+    }
+
 }
