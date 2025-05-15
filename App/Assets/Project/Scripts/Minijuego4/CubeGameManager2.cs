@@ -49,7 +49,7 @@ public class CubeGameManager2 : MonoBehaviour
         }
         else if (currentScene == "Minijuego4Level1")
         {
-            levelTimes[1] = 50f;
+            
             timeRemaining = levelTimes[1]; // Tiempo para Minijuego4Level1
             if (timeText != null) timeText.gameObject.SetActive(true); // Asegurarse de que se vea el tiempo en el nivel
         }

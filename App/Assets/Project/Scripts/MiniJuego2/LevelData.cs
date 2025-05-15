@@ -10,6 +10,8 @@ public class LevelData : ScriptableObject
     {
         public float minIntensity;
         public float maxIntensity;
+        public float correctMinIntensity;
+        public float correctMaxIntensity;
         public Color targetColor;
         public float colorTolerance = 0.1f;
     }
