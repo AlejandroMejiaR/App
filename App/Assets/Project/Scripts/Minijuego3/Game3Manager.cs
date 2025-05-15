@@ -110,7 +110,7 @@ public class Game3Manager : MonoBehaviour
             description = "Los clientes no reciben respuestas rápidas. La empresa necesita optimizar su canal de atención digital. ¿Cómo gestionas el problema de atención al cliente?",
             digitalSolution = new Solution
             {
-                description = "A) Instalar un chatbot con IA",
+                description = "A) Instalar un chatbot con IA ($3500)",
                 techAdaptabilityImpact = 15,
                 operationalEfficiencyImpact = 20,
                 customerSatisfactionImpact = 10,
@@ -118,7 +118,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Sistema de turnos con recordatorios",
+                description = "B) Sistema de turnos con recordatorios ($2000)",
                 techAdaptabilityImpact = -10,
                 operationalEfficiencyImpact = -5,
                 customerSatisfactionImpact = 25,
@@ -126,7 +126,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) Contratar más personal telefónico",
+                description = "C) Contratar más personal telefónico ($1000)",
                 techAdaptabilityImpact = -10,
                 operationalEfficiencyImpact = -5,
                 customerSatisfactionImpact = 25,
@@ -141,7 +141,7 @@ public class Game3Manager : MonoBehaviour
             description = "Tu tienda física funciona, pero no estás vendiendo nada en línea. Estás perdiendo un segmento enorme del mercado digital.¿Cómo digitalizas tu canal de ventas?",
             digitalSolution = new Solution
             {
-                description = "A) Crear un e-commerce propio con pasarela de pagos",
+                description = "A) Crear un e-commerce propio con pasarela de pagos ($5000)",
                 techAdaptabilityImpact = 25,
                 operationalEfficiencyImpact = 25,
                 customerSatisfactionImpact = 10,
@@ -149,7 +149,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Vender por plataformas externas (Rappi, Instagram Shop)",
+                description = "B) Vender por plataformas externas (Rappi, Instagram Shop) ($2500)",
                 techAdaptabilityImpact = 10,
                 operationalEfficiencyImpact = 15,
                 customerSatisfactionImpact = 5,
@@ -157,7 +157,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) Tomar pedidos por WhatsApp con catálogo PDF",
+                description = "C) Tomar pedidos por WhatsApp con catálogo PDF ($1000)",
                 techAdaptabilityImpact = -10,
                 operationalEfficiencyImpact = 5,
                 customerSatisfactionImpact = 20,
@@ -172,7 +172,7 @@ public class Game3Manager : MonoBehaviour
             description = "Tus procesos internos están desorganizados. Cada equipo usa sus propios métodos y la información no fluye bien. ¿Cómo organizas los procesos internos de la empresa? ",
             digitalSolution = new Solution
             {
-                description = "A) Instalar un ERP en la nube con integración total",
+                description = "A) Instalar un ERP en la nube con integración total ($6000)",
                 techAdaptabilityImpact = 30,
                 operationalEfficiencyImpact = 30,
                 customerSatisfactionImpact = 5,
@@ -180,7 +180,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Usar herramientas gratuitas (Sheets, Trello)",
+                description = "B) Usar herramientas gratuitas (Sheets, Trello) ($2000)",
                 techAdaptabilityImpact = 5,
                 operationalEfficiencyImpact = 15,
                 customerSatisfactionImpact = 5,
@@ -188,7 +188,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) Coordinarse por correo entre áreas",
+                description = "C) Coordinarse por correo entre áreas ($500)",
                 techAdaptabilityImpact = -15,
                 operationalEfficiencyImpact = -10,
                 customerSatisfactionImpact = +15,
@@ -203,7 +203,7 @@ public class Game3Manager : MonoBehaviour
             description = "El equipo no se siente cómodo con las nuevas herramientas digitales. Algunos se resisten al cambio o prefieren los métodos anteriores. ¿Cómo enfrentas la resistencia al cambio del personal? ",
             digitalSolution = new Solution
             {
-                description = "A) Implementar una plataforma de e-learning gamificada",
+                description = "A) Implementar una plataforma de e-learning gamificada ($3000)",
                 techAdaptabilityImpact = 30,
                 operationalEfficiencyImpact = 10,
                 customerSatisfactionImpact = 10,
@@ -211,7 +211,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Hacer talleres presenciales internos",
+                description = "B) Hacer talleres presenciales internos ($1500)",
                 techAdaptabilityImpact = 10,
                 operationalEfficiencyImpact = -5,
                 customerSatisfactionImpact = 5,
@@ -219,7 +219,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) Asignar compañeros expertos como apoyo informal",
+                description = "C) Asignar compañeros expertos como apoyo informal ($0)",
                 techAdaptabilityImpact = -25,
                 operationalEfficiencyImpact = 5,
                 customerSatisfactionImpact = -20,
@@ -234,7 +234,7 @@ public class Game3Manager : MonoBehaviour
             description = "Tu empresa no está llegando a nuevos clientes. Dependías del voz a voz, pero ya no es suficiente para crecer. ¿Cómo mejoras el alcance y visibilidad de tu negocio?",
             digitalSolution = new Solution
             {
-                description = "A) Lanzar campañas digitales automatizadas y segmentadas (Meta Ads, Google Ads)",
+                description = "A) Lanzar campañas digitales automatizadas y segmentadas (Meta Ads, Google Ads) ($4500)",
                 techAdaptabilityImpact = 25,
                 operationalEfficiencyImpact = 20,
                 customerSatisfactionImpact = 5,
@@ -242,7 +242,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Contratar un community manager para contenido orgánico",
+                description = "B) Contratar un community manager para contenido orgánico ($2000)",
                 techAdaptabilityImpact = 10,
                 operationalEfficiencyImpact = 5,
                 customerSatisfactionImpact = 5,
@@ -250,7 +250,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) Imprimir volantes y hacer publicidad física local",
+                description = "C) Imprimir volantes y hacer publicidad física local ($500)",
                 techAdaptabilityImpact = -10,
                 operationalEfficiencyImpact = -5,
                 customerSatisfactionImpact = 20,
@@ -265,7 +265,7 @@ public class Game3Manager : MonoBehaviour
             description = "La empresa almacena datos de clientes pero no tiene políticas de seguridad adecuadas. ¿Cómo proteges los datos sensibles de tus clientes?",
             digitalSolution = new Solution
             {
-                description = "A) Implementar firewall corporativo y protocolos de ciberseguridad",
+                description = "A) Implementar firewall corporativo y protocolos de ciberseguridad ($4000)",
                 techAdaptabilityImpact = 25,
                 operationalEfficiencyImpact = 20,
                 customerSatisfactionImpact = 5,
@@ -273,7 +273,7 @@ public class Game3Manager : MonoBehaviour
             },
             intermediateSolution = new Solution
             {
-                description = "B) Usar antivirus gratuito y crear contraseñas seguras manualmente",
+                description = "B) Usar antivirus gratuito y crear contraseñas seguras manualmente ($1500)",
                 techAdaptabilityImpact = 10,
                 operationalEfficiencyImpact = 5,
                 customerSatisfactionImpact = 5,
@@ -281,7 +281,7 @@ public class Game3Manager : MonoBehaviour
             },
             traditionalSolution = new Solution
             {
-                description = "C) No hacer cambios, confiar en la responsabilidad individual",
+                description = "C) No hacer cambios, confiar en la responsabilidad individual ($500)",
                 techAdaptabilityImpact = -20,
                 operationalEfficiencyImpact = -10,
                 customerSatisfactionImpact = 20,

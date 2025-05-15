@@ -1754,7 +1754,7 @@ MonoBehaviour:
   techAdaptability: 20
   operationalEfficiency: 20
   customerSatisfaction: 20
-  budget: 12000
+  budget: 13500
   minAttributeValue: 0
   maxAttributeValue: 100
   minBudgetToSurvive: 0

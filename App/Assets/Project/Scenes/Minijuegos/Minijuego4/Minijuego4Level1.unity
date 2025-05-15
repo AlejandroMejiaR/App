@@ -365,7 +365,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 6ad69fb6ecce3ec439cb4b3a0bda154a, type: 3}
   - sceneName: TutorialMinijuego4
     clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
-  - sceneName: TutorialMinijuego4
+  - sceneName: Minijuego4Level1
     clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
 --- !u!4 &5574311
 Transform:
@@ -454,7 +454,7 @@ MonoBehaviour:
   victoryDelay: 1
   levelTimes:
   - 999
-  - 5
+  - 60
 --- !u!1 &97123500
 GameObject:
   m_ObjectHideFlags: 0
