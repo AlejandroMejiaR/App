@@ -25,6 +25,16 @@ public class PlayerStateManager : MonoBehaviour
         playerState.SaveState(player.transform.position, player.transform.rotation, health, score, inventory, SceneManager.GetActiveScene().name);
     }
 
+    public void SaveCameraPositionIndex(int index)
+    {
+        playerState.cameraPositionIndex = index;
+    }
+
+    public int LoadCameraPositionIndex()
+    {
+        return playerState.cameraPositionIndex;
+    }
+
     public void LoadPlayerState(GameObject player)
     {
         Vector3 position;
@@ -45,4 +55,6 @@ public class PlayerStateManager : MonoBehaviour
         isFirstLoad = false; // Marcar que ya se cargó la escena al menos una vez
         //Debug.Log($"Estado cargado: Posición {position}, Rotación {rotation.eulerAngles}, Vida {health}, Puntaje {score}, Inventario {inventory}, Última Escena {scene}");
     }
+
+
 }

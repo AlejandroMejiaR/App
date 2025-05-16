@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95334864e160634e8e469fbc5f653b2, type: 3}
   m_Name: PlayerState
   m_EditorClassIdentifier: 
-  playerPosition: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 21.563494, y: -3.290727, z: -9.21727}
+  playerRotation: {x: 0, y: 0.9238788, z: 0, w: 0.38268518}
   playerHealth: 100
   playerScore: 0
-  lastScene: 
+  lastScene: Lobby
   inventoryItems: 0
+  cameraPositionIndex: 0
