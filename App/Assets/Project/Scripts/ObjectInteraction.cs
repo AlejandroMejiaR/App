@@ -31,17 +31,11 @@ public class ObjectInteraction : MonoBehaviour
         {
             StartCoroutine(FadeOutAndLoadScene());
         }
-
-        // Hacer que la UI siempre mire hacia la cámara
-        if (interactionUI)
-        {
-            interactionUI.transform.LookAt(mainCamera.transform);
-            interactionUI.transform.Rotate(0, 180, 0); // Voltear para que no esté al revés
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Entré");
         if (other.CompareTag("Player"))
         {
             isNear = true;

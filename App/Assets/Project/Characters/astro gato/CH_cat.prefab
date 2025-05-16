@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 1044321281107002646}
   - component: {fileID: -1273283817269587361}
   - component: {fileID: 8135095347763093093}
+  - component: {fileID: 8186176963308608398}
   m_Layer: 0
   m_Name: CH_cat
   m_TagString: Player
@@ -213,6 +214,18 @@ CapsuleCollider:
   m_Height: 1.3443667
   m_Direction: 1
   m_Center: {x: 0, y: 0.6534793, z: 0}
+--- !u!114 &8186176963308608398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5339685262854212969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545b2e1ccf71e994ea447442307aebfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8936326398005152537
 GameObject:
   m_ObjectHideFlags: 0
