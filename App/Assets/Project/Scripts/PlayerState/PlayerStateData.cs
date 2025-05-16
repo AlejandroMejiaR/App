@@ -9,6 +9,7 @@ public class PlayerStateData : ScriptableObject
     public int playerScore = 0;
     public string lastScene;
     public int inventoryItems = 0; // Número de objetos recogidos
+    public int cameraPositionIndex = 0;  // Guarda la opción 0,1,2 o 3
 
     public void SaveState(Vector3 position, Quaternion rotation, int health, int score, int inventory, string scene)
     {
