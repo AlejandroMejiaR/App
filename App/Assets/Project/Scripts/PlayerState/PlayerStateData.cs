@@ -4,31 +4,34 @@ using UnityEngine;
 public class PlayerStateData : ScriptableObject
 {
     public Vector3 playerPosition;
-    public Quaternion playerRotation; // Nueva variable para la rotación
+    public Quaternion playerRotation;
     public int playerHealth = 100;
     public int playerScore = 0;
     public string lastScene;
-    public int inventoryItems = 0; // Número de objetos recogidos
-    public int cameraPositionIndex = 0;  // Guarda la opción 0,1,2 o 3
+    public int inventoryItems = 0;
+    public int cameraPositionIndex = 0;
 
-    public void SaveState(Vector3 position, Quaternion rotation, int health, int score, int inventory, string scene)
+    public int progresoMinijuegos = 0; // NUEVO campo para progreso
+
+    public void SaveState(Vector3 position, Quaternion rotation, int health, int score, int inventory, string scene, int progreso)
     {
         playerPosition = position;
-        playerRotation = rotation; // Guardar la rotación
+        playerRotation = rotation;
         playerHealth = health;
         playerScore = score;
         inventoryItems = inventory;
         lastScene = scene;
+        progresoMinijuegos = progreso;
     }
 
-    public void LoadState(out Vector3 position, out Quaternion rotation, out int health, out int score, out int inventory, out string scene)
+    public void LoadState(out Vector3 position, out Quaternion rotation, out int health, out int score, out int inventory, out string scene, out int progreso)
     {
         position = playerPosition;
-        rotation = playerRotation; // Cargar la rotación
+        rotation = playerRotation;
         health = playerHealth;
         score = playerScore;
         inventory = inventoryItems;
         scene = lastScene;
+        progreso = progresoMinijuegos;
     }
 }
-

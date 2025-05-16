@@ -488,9 +488,11 @@ public class Game3Manager : MonoBehaviour
 
     public void GoToLobby()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerStateManager.Instance.IncrementarProgreso();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
     }
-
 }
 
 

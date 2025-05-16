@@ -268,6 +268,7 @@ public class CubeGameManager2 : MonoBehaviour
                 {
                     // Nivel 1 requiere click para continuar
                     victoryContinueButton.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
+                    PlayerStateManager.Instance.IncrementarProgreso();
                 }
             }
         }

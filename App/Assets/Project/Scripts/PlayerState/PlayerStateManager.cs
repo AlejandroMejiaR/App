@@ -20,21 +20,32 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerState(GameObject player, int health, int score, int inventory)
+    void Start()
     {
-        playerState.SaveState(player.transform.position, player.transform.rotation, health, score, inventory, SceneManager.GetActiveScene().name);
+        ResetProgreso();
+        SaveCameraPositionIndex(0);
     }
 
+    // Guardar estado del jugador, ahora incluyendo progreso
+    public void SavePlayerState(GameObject player, int health, int score, int inventory)
+    {
+        int progreso = playerState.progresoMinijuegos; // Obtener el progreso actual para guardar
+        playerState.SaveState(player.transform.position, player.transform.rotation, health, score, inventory, SceneManager.GetActiveScene().name, progreso);
+    }
+
+    // Guardar índice de posición de cámara
     public void SaveCameraPositionIndex(int index)
     {
         playerState.cameraPositionIndex = index;
     }
 
+    // Cargar índice de posición de cámara
     public int LoadCameraPositionIndex()
     {
         return playerState.cameraPositionIndex;
     }
 
+    // Cargar estado del jugador, ahora obteniendo el progreso también
     public void LoadPlayerState(GameObject player)
     {
         Vector3 position;
@@ -43,18 +54,36 @@ public class PlayerStateManager : MonoBehaviour
         int score;
         int inventory;
         string scene;
+        int progreso; // Variable para cargar progreso
 
-        playerState.LoadState(out position, out rotation, out health, out score, out inventory, out scene);
+        playerState.LoadState(out position, out rotation, out health, out score, out inventory, out scene, out progreso);
 
         if (!isFirstLoad && scene == SceneManager.GetActiveScene().name)
         {
             player.transform.position = position;
-            player.transform.rotation = rotation; // Aplicar la rotación al jugador
+            player.transform.rotation = rotation;
         }
 
-        isFirstLoad = false; // Marcar que ya se cargó la escena al menos una vez
-        //Debug.Log($"Estado cargado: Posición {position}, Rotación {rotation.eulerAngles}, Vida {health}, Puntaje {score}, Inventario {inventory}, Última Escena {scene}");
+        isFirstLoad = false;
     }
 
+    // Obtener el progreso actual
+    public int GetProgreso()
+    {
+        return playerState.progresoMinijuegos;
+    }
 
+    // Incrementar el progreso en 1, con límite en 4
+    public void IncrementarProgreso()
+    {
+        playerState.progresoMinijuegos++;
+        if (playerState.progresoMinijuegos > 4)
+            playerState.progresoMinijuegos = 4;
+    }
+
+    // Reiniciar progreso a 0
+    public void ResetProgreso()
+    {
+        playerState.progresoMinijuegos = 0;
+    }
 }

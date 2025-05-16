@@ -18,6 +18,9 @@ public class SceneChanger : MonoBehaviour
 
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
+            if(sceneToLoad == "Lobby"){
+                PlayerStateManager.Instance.IncrementarProgreso();
+            }
             SceneManager.LoadScene(sceneToLoad);
         }
         else
