@@ -883,7 +883,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 980
     - m_ComponentGlyphIDs: d2030000ed060000
       m_LigatureGlyphID: 981
-<<<<<<< HEAD
     - m_ComponentGlyphIDs: e4030000e8060000
       m_LigatureGlyphID: 1000
     - m_ComponentGlyphIDs: e4030000960a0000
@@ -906,18 +905,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 1003
     - m_ComponentGlyphIDs: e4030000900a0000
       m_LigatureGlyphID: 1004
-=======
-    - m_ComponentGlyphIDs: 24010000e8060000
-      m_LigatureGlyphID: 293
-    - m_ComponentGlyphIDs: 240100008c0a0000
-      m_LigatureGlyphID: 294
-    - m_ComponentGlyphIDs: 24010000ed060000
-      m_LigatureGlyphID: 295
-    - m_ComponentGlyphIDs: 240100006c070000
-      m_LigatureGlyphID: 1975
-    - m_ComponentGlyphIDs: 240100006b070000
-      m_LigatureGlyphID: 1913
->>>>>>> AlejandroM
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 2

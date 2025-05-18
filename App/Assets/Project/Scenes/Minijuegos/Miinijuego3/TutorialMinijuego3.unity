@@ -853,9 +853,9 @@ MonoBehaviour:
   onButtonPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 166452671}
-        m_TargetAssemblyTypeName: InteractiveButton3D, Assembly-CSharp
-        m_MethodName: Salir
+      - m_Target: {fileID: 415238674}
+        m_TargetAssemblyTypeName: Game3Manager, Assembly-CSharp
+        m_MethodName: GoToLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

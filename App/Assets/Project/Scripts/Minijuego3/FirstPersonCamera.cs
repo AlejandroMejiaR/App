@@ -21,7 +21,7 @@ public class FirstPersonCamera : MonoBehaviour
         }
 
         LockCursor();
-    }
+    }   
 
     void Update()
     {
