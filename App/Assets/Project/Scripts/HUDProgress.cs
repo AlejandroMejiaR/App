@@ -7,7 +7,7 @@ public class HUDProgress : MonoBehaviour
 {
     public TextMeshProUGUI progressText;
     public Slider progressBar;
-    public Button logoutButton; // Botón único para cerrar sesión
+    public Button logoutButton;
 
     private int totalMinijuegos = 4;
     private int minijuegosCompletados;
@@ -16,40 +16,24 @@ public class HUDProgress : MonoBehaviour
     {
         if (progressBar == null || progressText == null || logoutButton == null)
         {
-            Debug.LogError("ERROR: Alguna referencia en HUDProgress no está asignada en el Inspector.");
+            Debug.LogError("ERROR: Alguna referencia en HUDProgress no estÃ¡ asignada en el Inspector.");
             return;
         }
 
-        minijuegosCompletados = PlayerPrefs.GetInt("MinijuegosCompletados", 0);
+        // Obtener progreso actual desde PlayerStateManager
+        minijuegosCompletados = PlayerStateManager.Instance.GetProgreso();
         minijuegosCompletados = Mathf.Clamp(minijuegosCompletados, 0, totalMinijuegos);
 
-        progressBar.value = (float)minijuegosCompletados / totalMinijuegos;
+        UpdateHUD();
 
-        // Solo actualizar si es necesario
-        if (minijuegosCompletados > 0)
-        {
-            UpdateHUD();
-        }
-
-        logoutButton.onClick.RemoveAllListeners();  // Borra eventos previos
-        logoutButton.onClick.AddListener(Logout);   // Agrega solo uno
+        logoutButton.onClick.RemoveAllListeners();
+        logoutButton.onClick.AddListener(Logout);
     }
 
-
-    void UpdateHUD()
+    // MÃ©todo para actualizar visuales del HUD segÃºn progreso actual
+    public void UpdateHUD()
     {
-        if (progressText == null || progressBar == null)
-        {
-            Debug.LogError("ERROR: HUDProgress no tiene referencias asignadas.");
-            return;
-        }
-
-        // Evitar llamadas repetidas
-        if (progressText.text == $"Minijuegos: {minijuegosCompletados} / {totalMinijuegos}")
-        {
-            return; // No hacer nada si el texto ya es el mismo
-        }
-
+        minijuegosCompletados = PlayerStateManager.Instance.GetProgreso();
         minijuegosCompletados = Mathf.Clamp(minijuegosCompletados, 0, totalMinijuegos);
 
         progressText.text = $"Minijuegos: {minijuegosCompletados} / {totalMinijuegos}";
@@ -59,17 +43,16 @@ public class HUDProgress : MonoBehaviour
     }
 
 
-    // Cerrar Sesión (Reinicia progreso y vuelve al menú principal)
     public void Logout()
     {
-        Debug.Log("Cerrando sesión...");
+        Debug.Log("Cerrando juego...");
 
-        // Reiniciar progreso
-        PlayerPrefs.SetInt("MinijuegosCompletados", 0);
-        PlayerPrefs.Save();
+        PlayerStateManager.Instance.ResetProgreso();
 
-        // Volver al menú principal
-        SceneManager.LoadScene("MainMenu"); // Asegúrate de que "MainMenu" es el nombre correcto de la escena
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; // Para salir del play mode en editor
+        #else
+            Application.Quit(); // Para builds
+        #endif
     }
 }
-

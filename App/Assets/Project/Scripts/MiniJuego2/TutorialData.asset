@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f1645a58c3fa54db0d07799cf57a5c, type: 3}
   m_Name: TutorialData
   m_EditorClassIdentifier: 
-  correctCameraIndex: 0
+  correctCameraIndex: 1
   targetLightSettings:
-  - minIntensity: 450
+  - minIntensity: 0
     maxIntensity: 500
-    targetColor: {r: 1, g: 1, b: 1, a: 0}
+    correctMinIntensity: 450
+    correctMaxIntensity: 500
+    targetColor: {r: 1, g: 0, b: 0, a: 0}
     colorTolerance: 0.1
-  - minIntensity: 150
-    maxIntensity: 200
-    targetColor: {r: 1, g: 1, b: 1, a: 0}
+  - minIntensity: 0
+    maxIntensity: 500
+    correctMinIntensity: 450
+    correctMaxIntensity: 500
+    targetColor: {r: 1, g: 0, b: 0, a: 0}
     colorTolerance: 0.1
-  - minIntensity: 10
-    maxIntensity: 20
-    targetColor: {r: 1, g: 1, b: 1, a: 0}
+  - minIntensity: 0
+    maxIntensity: 500
+    correctMinIntensity: 450
+    correctMaxIntensity: 500
+    targetColor: {r: 1, g: 0, b: 0, a: 0}
     colorTolerance: 0.1
