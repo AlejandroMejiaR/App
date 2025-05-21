@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Minijuegos/Minijuego4/TutorialMinijuego4.unity
     guid: 3cfc8a13f18eb1048b4577b4fb6f8817
+  - enabled: 1
+    path: Assets/Project/Scenes/Final.unity
+    guid: ba69af646fa482a479ce2b587ffad6a5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
