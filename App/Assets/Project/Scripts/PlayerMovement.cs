@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public float pcSpeed = 5f;
     public float mobileSpeed = 5f; 
     public float pcRotationSpeed = 10f;
-    public float mobileRotationSpeed = 25f; 
+    public float mobileRotationSpeed = 25f;
 
+    private Camera cam;
     private float speed;
     private float rotationSpeed;
 
@@ -31,8 +32,10 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         rb.linearDamping = 25f;
 
+        cam = Camera.main;
+
         // Detectar si el juego está en móvil (WebGL o Android/iOS)
-        #if UNITY_WEBGL && !UNITY_EDITOR
+         #if UNITY_WEBGL && !UNITY_EDITOR
         isMobile = IsMobile();
         #else
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
@@ -62,20 +65,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Leer entrada del teclado o joystick
-        float moveX = (isMobile ? joystick.Horizontal : Input.GetAxis("Horizontal"));
-        float moveZ = (isMobile ? joystick.Vertical : Input.GetAxis("Vertical"));
+        float moveX = isMobile ? joystick.Horizontal : Input.GetAxis("Horizontal");
+        float moveZ = isMobile ? joystick.Vertical : Input.GetAxis("Vertical");
 
-        // Convertir entrada en movimiento isométrico
-        moveDirection = new Vector3(moveX, 0, moveZ);
-        moveDirection = Quaternion.Euler(0, 45, 0) * moveDirection;
+        // CÁLCULO RELATIVO A LA CÁMARA:
+        Vector3 camForward = Vector3.ProjectOnPlane(cam.transform.forward, Vector3.up).normalized;
+        Vector3 camRight = cam.transform.right;
 
-        // Rotación del personaje
+        moveDirection = moveX * camRight + moveZ * camForward;
+
+        // Rotación del personaje hacia moveDirection (igual que antes)
         if (moveDirection.magnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+
     }
 
     void FixedUpdate()

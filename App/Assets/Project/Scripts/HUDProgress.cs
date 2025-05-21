@@ -7,14 +7,15 @@ public class HUDProgress : MonoBehaviour
 {
     public TextMeshProUGUI progressText;
     public Slider progressBar;
-    public Button logoutButton;
+    //public Button logoutButton;
 
     private int totalMinijuegos = 4;
     private int minijuegosCompletados;
 
     void Start()
     {
-        if (progressBar == null || progressText == null || logoutButton == null)
+        //if (progressBar == null || progressText == null || logoutButton == null)
+        if (progressBar == null || progressText == null)
         {
             Debug.LogError("ERROR: Alguna referencia en HUDProgress no está asignada en el Inspector.");
             return;
@@ -26,8 +27,8 @@ public class HUDProgress : MonoBehaviour
 
         UpdateHUD();
 
-        logoutButton.onClick.RemoveAllListeners();
-        logoutButton.onClick.AddListener(Logout);
+        /*logoutButton.onClick.RemoveAllListeners();
+        logoutButton.onClick.AddListener(Logout);*/
     }
 
     // Método para actualizar visuales del HUD según progreso actual
@@ -43,7 +44,7 @@ public class HUDProgress : MonoBehaviour
     }
 
 
-    public void Logout()
+    /*public void Logout()
     {
         Debug.Log("Cerrando juego...");
 
@@ -54,5 +55,5 @@ public class HUDProgress : MonoBehaviour
         #else
             Application.Quit(); // Para builds
         #endif
-    }
+    }*/
 }

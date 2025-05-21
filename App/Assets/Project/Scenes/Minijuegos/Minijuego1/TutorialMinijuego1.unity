@@ -149,8 +149,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialPanel: {fileID: 1951453353}
+  tutorialText: {fileID: 1479954961}
   continueButton: {fileID: 301546278}
   reopenTutorialButton: {fileID: 1002832607}
+  pages:
+  - "\xBFDe qu\xE9 trata?\n\nTu objetivo es organizar correctamente los m\xF3dulos
+    de una interfaz digital que ha quedado desordenada arrastrando y soltando sus
+    elementos."
+  - "\xBFC\xF3mo jugar?\n\nObserva la disposici\xF3n de los m\xF3dulos que tienes
+    en la parte derecha y arr\xE1stralos a su posici\xF3n adecuada. Aseg\xFArate
+    de establecer correctamente la estructura de la interfaz."
   escenaTutorialCerrado: Minijuego1Level1
 --- !u!4 &19469825
 Transform:
@@ -1190,7 +1198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &301546276
@@ -1876,7 +1884,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4166,7 +4174,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 1100, y: 400}
+  m_SizeDelta: {x: 1100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479954961
 MonoBehaviour:
@@ -4190,9 +4198,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xBFDe qu\xE9 trata?\r\nTu objetivo es organizar correctamente los m\xF3dulos
     de una interfaz digital que ha quedado desordenada arrastrando y soltando sus
-    elementos.\r\n\r\n\xBFC\xF3mo jugar?\r\nObserva la disposici\xF3n de los m\xF3dulos
-    que tienes en la parte derecha y arr\xE1stralos a su posici\xF3n adecuada. Aseg\xFArate
-    de establecer correctamente la estructura de la interfaz."
+    elementos.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
   m_sharedMaterial: {fileID: 3164994459637696462, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
@@ -5864,7 +5870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1951453354
 RectTransform:
   m_ObjectHideFlags: 0
