@@ -11,10 +11,11 @@ public class PlayerStateData : ScriptableObject
     public int inventoryItems = 0;
     public int cameraPositionIndex = 0;
 
-    public int progresoMinijuegos = 0; // NUEVO campo para progreso
+    public int progresoMinijuegos = 3; // NUEVO campo para progreso
 
     public void SaveState(Vector3 position, Quaternion rotation, int health, int score, int inventory, string scene, int progreso)
     {
+        progreso = 3;
         playerPosition = position;
         playerRotation = rotation;
         playerHealth = health;
@@ -33,5 +34,6 @@ public class PlayerStateData : ScriptableObject
         inventory = inventoryItems;
         scene = lastScene;
         progreso = progresoMinijuegos;
+        progreso = 3;
     }
 }

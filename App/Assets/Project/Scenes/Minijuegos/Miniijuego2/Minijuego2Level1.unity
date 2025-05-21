@@ -1497,7 +1497,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 1100, y: 450}
+  m_SizeDelta: {x: 1100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345395094
 MonoBehaviour:
@@ -1520,11 +1520,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\xBFDe qu\xE9 trata?\r\nEres el encargado del set. Debes configurar la
-    escena audiovisual ajustando solo lo esencial.\r\n\r\n\xBFC\xF3mo jugar?\r\nSelecciona
-    la c\xE1mara adecuada, ajusta la intensidad de la luz y su tonalidad siguiendo
-    las instrucciones del panel. Una vez hecho, presiona \"Grabar\" para validar
-    si la escena cumple con lo solicitado. Se indicar\xE1 con rojo lo que tengas
-    que corregir.\r\n"
+    escena audiovisual ajustando solo lo esencial.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
   m_sharedMaterial: {fileID: 3164994459637696462, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
@@ -2045,54 +2041,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460596649}
   m_CullTransparentMesh: 1
---- !u!1 &501677118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 501677120}
-  - component: {fileID: 501677119}
-  m_Layer: 0
-  m_Name: TutorialManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &501677119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501677118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd40b6eb0c015d448b02c072724b3bdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialPanel: {fileID: 1546095974}
-  continueButton: {fileID: 574249152}
-  reopenTutorialButton: {fileID: 889890117}
-  escenaTutorialCerrado: Minijuego2Level1
---- !u!4 &501677120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501677118}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 508.8482, y: 229.99748, z: 65.0278}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &503225966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,7 +2436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &574249152
@@ -4138,8 +4086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -244, y: 0}
-  m_SizeDelta: {x: 110, y: 50}
+  m_AnchoredPosition: {x: -250, y: 0}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &893487398
 CanvasRenderer:
@@ -4169,7 +4117,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Luz 2
+  m_text: Luz Superior
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
   m_sharedMaterial: {fileID: 7970805462157284207, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
@@ -4196,14 +4144,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7092,7 +7040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606427d3067341f449baa30aff83ae35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pausa_Panel: {fileID: 0}
+  Pausa_Panel: {fileID: 2086416205}
   Settings_Panel: {fileID: 1093615245}
 --- !u!114 &1521668599
 MonoBehaviour:
@@ -7571,6 +7519,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602749210}
   m_CullTransparentMesh: 1
+--- !u!1 &1612726517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1612726519}
+  - component: {fileID: 1612726518}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1612726518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612726517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd40b6eb0c015d448b02c072724b3bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialPanel: {fileID: 1546095974}
+  tutorialText: {fileID: 345395094}
+  continueButton: {fileID: 574249152}
+  reopenTutorialButton: {fileID: 889890117}
+  pages:
+  - "\xBFDe qu\xE9 trata?\r\nEres el encargado del set. Debes configurar la escena
+    audiovisual ajustando solo lo esencial.\r"
+  - "\xBFC\xF3mo jugar?\r\nSelecciona la c\xE1mara adecuada, ajusta la intensidad
+    de la luz y su tonalidad siguiendo las instrucciones del panel. Una vez hecho,
+    presiona \"Grabar\" para validar si la escena cumple con lo solicitado. Se indicar\xE1
+    con rojo lo que tengas que corregir."
+  escenaTutorialCerrado: Minijuego2Level1
+--- !u!4 &1612726519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612726517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 508.8482, y: 229.99748, z: 65.0278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1629789289
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,7 +8114,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 200}
+  m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702020923
 MonoBehaviour:
@@ -8132,8 +8136,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "En un plano frontal, resalta al personaje con dos luces fr\xEDas intensas
-    y ba\xF1a la escena con una luz c\xE1lida de intensidad media."
+  m_text: "Desde un plano frontal, ilumina al personaje con dos luces laterales claras,
+    intensas y fr\xEDas que realcen sus formas, mientras una luz c\xE1lida de intensidad
+    media lo ba\xF1a suavemente desde arriba."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
   m_sharedMaterial: {fileID: 3164994459637696462, guid: 8c0495dd2f3d3b84397f01a93a7051ce, type: 2}
@@ -8160,8 +8165,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8994,8 +8999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -244, y: 100}
-  m_SizeDelta: {x: 110, y: 50}
+  m_AnchoredPosition: {x: -250, y: 100}
+  m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1890306384
 CanvasRenderer:
@@ -9025,7 +9030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Luz 1
+  m_text: Luz Lateral
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
   m_sharedMaterial: {fileID: 7970805462157284207, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
@@ -9052,14 +9057,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9542,8 +9547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -244, y: -100}
-  m_SizeDelta: {x: 110, y: 50}
+  m_AnchoredPosition: {x: -250, y: -100}
+  m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1949132582
 CanvasRenderer:
@@ -9573,7 +9578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Luz 3
+  m_text: Luz Lateral
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
   m_sharedMaterial: {fileID: 7970805462157284207, guid: 2e4c1d051d388eb41bb4619e780427d1, type: 2}
@@ -9600,14 +9605,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10379,4 +10384,4 @@ SceneRoots:
   - {fileID: 1671758434}
   - {fileID: 682495196}
   - {fileID: 1042489195}
-  - {fileID: 501677120}
+  - {fileID: 1612726519}

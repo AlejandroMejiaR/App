@@ -1032,7 +1032,7 @@ MonoBehaviour:
   warningText: {fileID: 1040266426}
   titleText: {fileID: 1593742462}
   maxUsernameLength: 15
-  mainMenuScene: MainMenu
+  mainMenuScene: LoadingMenu
   defaultUsername: Jugador
 --- !u!1 &1593742460
 GameObject:

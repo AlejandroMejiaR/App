@@ -7,6 +7,7 @@ public class PanelController : MonoBehaviour
 
     // La tecla que quieres usar para abrir/cerrar el panel
     public KeyCode toggleKey = KeyCode.P;  // Puedes cambiar la P por la que quieras
+    
 
     void Update()
     {
