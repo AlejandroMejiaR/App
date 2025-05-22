@@ -26,11 +26,26 @@ public class Login : MonoBehaviour
     private bool isChangingUsername = false;
     private bool isAuthenticated = false; // Indicates if Unity Authentication is successful
 
+    private float lastTypingSFXTime = 0f;           // Para evitar que se reproduzca cada frame
+    private float typingSFXInterval = 0.1f;         // Intervalo mínimo entre sonidos
+
     private async void Start()
     {
         ConfigureUI();
         await InitializeServices();
-        await LoadExistingUser(); 
+        await LoadExistingUser();
+
+        // SUSCRIBIR AL EVENTO onValueChanged para reproducir SFX de tecleo
+        nameInputField.onValueChanged.AddListener(OnInputFieldChanged);
+    }
+
+    private void OnInputFieldChanged(string text)
+    {
+        if (Time.time - lastTypingSFXTime > typingSFXInterval)
+        {
+            AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxTyping);
+            lastTypingSFXTime = Time.time;
+        }
     }
 
     private void ConfigureUI()
@@ -181,6 +196,9 @@ public class Login : MonoBehaviour
 
     public async void OnActionButtonClicked()
     {
+        // Reproducir sonido click antes de hacer la acción
+        AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxClick);
+
         string userName = nameInputField.text.Trim();
 
         if (string.IsNullOrEmpty(userName))

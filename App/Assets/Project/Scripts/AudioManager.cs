@@ -13,6 +13,19 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private List<SceneAudio> sceneAudioList;
 
+    [Header("Audio Source para SFX")]
+    [SerializeField] private AudioSource sfxSource;
+
+    [Header("Clips SFX (Opcional)")]
+    public AudioClip sfxTyping;
+    public AudioClip sfxClick;
+    public AudioClip sfxHover;
+    public AudioClip sfxDragStart;
+    public AudioClip sfxDragEnd;
+    public AudioClip sfxCorrect;
+    public AudioClip sfxError;
+
+
     [System.Serializable]
     public class SceneAudio
     {
@@ -35,6 +48,14 @@ public class AudioManager : MonoBehaviour
 
         if (musicSource == null)
             musicSource = GetComponent<AudioSource>();
+
+        if (sfxSource == null)
+        {
+            // Si no asignaste sfxSource en inspector, creamos uno
+            sfxSource = gameObject.AddComponent<AudioSource>();
+            sfxSource.loop = false;
+            sfxSource.playOnAwake = false;
+        }
 
         musicSource.loop = true;
         musicSource.playOnAwake = false;
@@ -70,5 +91,12 @@ public class AudioManager : MonoBehaviour
     public void CambiarVolumenSFX(float volumen)
     {
         audioMixer.SetFloat("VolumenSFX", volumen);
+    }
+
+    // Método público para reproducir cualquier SFX
+    public void ReproducirSFX(AudioClip clip)
+    {
+        if (clip == null) return;
+        sfxSource.PlayOneShot(clip);
     }
 }
