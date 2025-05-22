@@ -1765,15 +1765,6 @@
         "name": "Video",
         "dependencies": [
           {
-            "name": "VideoClip",
-            "scenes": [
-              "Assets/Project/Scenes/LoadingMenu.unity",
-              "Assets/Project/Scenes/LoadingScene.unity"
-            ],
-            "dependencyType": 0,
-            "icon": null
-          },
-          {
             "name": "VideoPlayer",
             "scenes": [
               "Assets/Project/Scenes/LoadingMenu.unity",
