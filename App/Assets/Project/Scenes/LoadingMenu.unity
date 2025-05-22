@@ -481,7 +481,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -686,6 +686,7 @@ MonoBehaviour:
   fadePanel: {fileID: 29618841}
   nextSceneName: MainMenu
   fadeDuration: 1.5
+  videoFileName: IntroSonido.mp4
 --- !u!4 &1695835055
 Transform:
   m_ObjectHideFlags: 0
