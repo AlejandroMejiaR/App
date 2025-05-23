@@ -5225,6 +5225,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
   - sceneName: TutorialMinijuego4
     clip: {fileID: 8300000, guid: 48abd1fb25c896246abf31486ebab743, type: 3}
+  sfxSource: {fileID: 0}
+  sfxTyping: {fileID: 0}
+  sfxClick: {fileID: 0}
+  sfxHover: {fileID: 0}
+  sfxDragStart: {fileID: 0}
+  sfxDragEnd: {fileID: 0}
+  sfxCorrect: {fileID: 0}
+  sfxError: {fileID: 0}
 --- !u!4 &1424240345
 Transform:
   m_ObjectHideFlags: 0
