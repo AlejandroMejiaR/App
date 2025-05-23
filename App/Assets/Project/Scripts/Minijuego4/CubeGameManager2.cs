@@ -155,6 +155,10 @@ public class CubeGameManager2 : MonoBehaviour
 
         if (!allZonesOccupied || !allCorrect)
         {
+            // Reproducir sonido de error
+            if (AudioManager.instance != null)
+                AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxError);
+
             yield return new WaitForSeconds(0.5f);
             
             // Segunda pasada: Eliminar solo los cubos incorrectos
@@ -202,7 +206,11 @@ public class CubeGameManager2 : MonoBehaviour
             isVerificationCompleted = false;
             yield break;
         }
-        
+
+        // Reproducir sonido de correcto
+        if (AudioManager.instance != null)
+            AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxCorrect);
+
         // Bloquear todos los cubos y mostrar victoria
         foreach (SafeZone2 zone in safeZones)
         {

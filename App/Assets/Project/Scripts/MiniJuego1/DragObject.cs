@@ -17,12 +17,16 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        
         if (cubeController.isLocked) return;
         
         isDragging = true;
         mZCoord = Camera.main.WorldToScreenPoint(transform.position).z;
         mOffset = transform.position - GetMouseWorldPos();
         cubeController.ClearSafeZone();
+
+        // Reproducir SFX de inicio de drag
+        AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxDragStart);
     }
 
     private Vector3 GetMouseWorldPos()
@@ -51,6 +55,10 @@ public class DragObject : MonoBehaviour
         if (cubeController.isLocked || !isDragging) return;
         
         isDragging = false;
+
+        // Reproducir SFX de fin de drag
+        AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxDragEnd);
+
         StartCoroutine(FallAndCheckPosition());
     }
 

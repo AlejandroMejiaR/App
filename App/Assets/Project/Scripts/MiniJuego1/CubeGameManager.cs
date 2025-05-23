@@ -61,11 +61,16 @@ public class CubeGameManager : MonoBehaviour
 
         if (allCorrect)
         {
+            // Sonido afirmativo
+            AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxCorrect);
+
             yield return new WaitForSeconds(victoryDelay);
             StartCoroutine(VictoryAnimation());
         }
         else
         {
+            // Sonido de error
+            AudioManager.instance.ReproducirSFX(AudioManager.instance.sfxError);
             StartCoroutine(HandleIncorrectPlacement());
         }
     }
