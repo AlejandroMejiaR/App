@@ -77,3 +77,6 @@ App/Assets/Project/Main Room/*
 
 # no hacer seguimiento a la carpeta Library
 App/Library/*
+
+# no hacer seguimiento a la carpeta builds
+App/WebGL Builds/*
