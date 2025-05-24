@@ -2745,11 +2745,11 @@ MonoBehaviour:
   musicSource: {fileID: 1326858553}
   sceneAudioList:
   - sceneName: MainMenu
-    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+    clip: {fileID: 8300000, guid: a7ff2cc6bb0247244be543c4e00bbd40, type: 3}
   - sceneName: CH_Selection
-    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+    clip: {fileID: 8300000, guid: a7ff2cc6bb0247244be543c4e00bbd40, type: 3}
   - sceneName: Lobby
-    clip: {fileID: 8300000, guid: b59dd1a3b9bdb564290c643079fd1ae1, type: 3}
+    clip: {fileID: 8300000, guid: a7ff2cc6bb0247244be543c4e00bbd40, type: 3}
   - sceneName: TutorialMinijuego1
     clip: {fileID: 8300000, guid: 559895c30cdf98d41882ab71e9b4ac87, type: 3}
   - sceneName: Minijuego1Level1
@@ -2770,6 +2770,8 @@ MonoBehaviour:
   sfxHover: {fileID: 8300000, guid: 8e850977ea336ac4b8251c3dbf889e30, type: 3}
   sfxDragStart: {fileID: 0}
   sfxDragEnd: {fileID: 0}
+  sfxCorrect: {fileID: 0}
+  sfxError: {fileID: 0}
 --- !u!4 &1326858556
 Transform:
   m_ObjectHideFlags: 0
