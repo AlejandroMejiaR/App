@@ -6,19 +6,19 @@ public class VictoryCreditsManager : MonoBehaviour
     [Tooltip("Panel de victoria que aparece al entrar en esta escena")]
     public GameObject victoryPanel;
 
-    [Tooltip("Panel de créditos que debe mostrarse después")]
+    [Tooltip("Panel de crï¿½ditos que debe mostrarse despuï¿½s")]
     public GameObject creditsPanel;
 
-    [Tooltip("Segundos que espera antes de ocultar victoryPanel y mostrar créditos")]
+    [Tooltip("Segundos que espera antes de ocultar victoryPanel y mostrar crï¿½ditos")]
     public float delayBeforeCredits = 10f;
 
     private void Start()
     {
-        // Asegúrate de que los paneles estén en el estado inicial correcto
+        // Asegï¿½rate de que los paneles estï¿½n en el estado inicial correcto
         if (victoryPanel != null) victoryPanel.SetActive(true);
         if (creditsPanel != null) creditsPanel.SetActive(false);
 
-        // Lanza la rutina de transición
+        // Lanza la rutina de transiciï¿½n
         StartCoroutine(HideVictoryShowCredits());
     }
 
@@ -30,6 +30,6 @@ public class VictoryCreditsManager : MonoBehaviour
             victoryPanel.SetActive(false);
 
         if (creditsPanel != null)
-            creditsPanel.SetActive(true);
+            victoryPanel.SetActive(true);
     }
 }

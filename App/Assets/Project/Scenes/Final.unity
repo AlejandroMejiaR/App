@@ -448,8 +448,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryPanel: {fileID: 680137753}
-  creditsPanel: {fileID: 0}
-  delayBeforeCredits: 10
+  creditsPanel: {fileID: 680137753}
+  delayBeforeCredits: 0
 --- !u!1 &680137753
 GameObject:
   m_ObjectHideFlags: 0
